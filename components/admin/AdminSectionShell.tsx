@@ -3,7 +3,7 @@ import Link from "next/link";
 type AdminSectionShellProps = {
   eyebrow: string;
   title: string;
-  description: string;
+  description?: string;
   publicHref?: string;
   publicLabel?: string;
   children?: React.ReactNode;
@@ -33,10 +33,12 @@ export function AdminSectionShell({
           </Link>
         )}
       </div>
-      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#4a5d6a] sm:text-base">
-        {description}
-      </p>
-      <div className="mt-8">{children}</div>
+      {description ? (
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#4a5d6a] sm:text-base">
+          {description}
+        </p>
+      ) : null}
+      <div className={description ? "mt-8" : "mt-6"}>{children}</div>
     </div>
   );
 }

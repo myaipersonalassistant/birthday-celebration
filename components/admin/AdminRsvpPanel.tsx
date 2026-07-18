@@ -6,6 +6,7 @@ import {
   getAdminRsvpSubmissions,
   type RsvpSubmission,
 } from "@/app/actions/admin-rsvp";
+import { downloadRsvpCsv } from "@/lib/rsvp-csv";
 
 const PAGE_SIZE = 6;
 
@@ -189,16 +190,31 @@ export function AdminRsvpPanel({ initialSubmissions }: AdminRsvpPanelProps) {
                 Dinner, cruise, and plus-ones at a glance
               </p>
             </div>
-            <button
-              type="button"
-              onClick={handleRefresh}
-              disabled={isRefreshing || isPending}
-              aria-label={isRefreshing ? "Refreshing" : "Refresh"}
-              title="Refresh"
-              className="grid size-9 place-items-center border border-white/20 text-white/70 transition hover:border-[#d8ad61] hover:text-[#d8ad61] disabled:opacity-50"
-            >
-              <RefreshIcon spinning={isRefreshing} />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => downloadRsvpCsv(filtered)}
+                disabled={filtered.length === 0}
+                className="border border-white/20 px-3 py-2 text-[0.65rem] font-bold tracking-[0.12em] text-white/80 uppercase transition hover:border-[#d8ad61] hover:text-[#d8ad61] disabled:cursor-not-allowed disabled:opacity-40"
+                title={
+                  filtered.length === submissions.length
+                    ? "Export all RSVPs as CSV"
+                    : "Export the currently filtered RSVPs as CSV"
+                }
+              >
+                Export CSV
+              </button>
+              <button
+                type="button"
+                onClick={handleRefresh}
+                disabled={isRefreshing || isPending}
+                aria-label={isRefreshing ? "Refreshing" : "Refresh"}
+                title="Refresh"
+                className="grid size-9 place-items-center border border-white/20 text-white/70 transition hover:border-[#d8ad61] hover:text-[#d8ad61] disabled:opacity-50"
+              >
+                <RefreshIcon spinning={isRefreshing} />
+              </button>
+            </div>
           </div>
 
           <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
