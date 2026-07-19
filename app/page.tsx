@@ -63,8 +63,13 @@ function ClockIcon({ className }: IconProps) {
 
 function PlayIcon({ className }: IconProps) {
   return (
-    <svg aria-hidden="true" className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M8.4 5.7a1 1 0 0 1 1.5-.84l9 6.3a1 1 0 0 1 0 1.68l-9 6.3a1 1 0 0 1-1.5-.84V5.7Z" />
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path d="M8.4 6.2a1 1 0 0 1 1.52-.86l9.1 5.3a1 1 0 0 1 0 1.72l-9.1 5.3A1 1 0 0 1 8 16.8V7.2a1 1 0 0 1 .4-1Z" />
     </svg>
   );
 }
@@ -118,7 +123,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-2">
                   <ClockIcon className="size-5 text-[#d9ad61]" />
-                  <span>6:30 PM</span>
+                  <span>1:00 PM</span>
                 </div>
               </div>
 
@@ -130,11 +135,11 @@ export default function Home() {
                   RESERVE YOUR PLACE
                 </a>
                 <a
-                  href="#invitation"
+                  href="/invitation"
                   className="inline-flex min-h-13 items-center justify-center gap-3 px-4 text-[0.67rem] font-extrabold tracking-[0.14em] transition-colors hover:text-[#e4be77]"
                 >
                   <span className="grid size-9 place-items-center rounded-full border border-white">
-                    <PlayIcon className="ml-0.5 size-3" />
+                    <PlayIcon className="size-3.5 translate-x-px" />
                   </span>
                   WATCH INVITATION
                 </a>

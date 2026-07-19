@@ -90,7 +90,7 @@ const experiences = [
   {
     icon: "cruise" as const,
     title: "Private Catamaran",
-    detail: "2:00 – 3:00 PM · Port Olímpic",
+    detail: "1:00 – 3:00 PM · Port Olímpic",
     image: "/1.png",
     alt: "Luxury catamaran sailing along the Barcelona coast",
   },

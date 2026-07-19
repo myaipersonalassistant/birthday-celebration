@@ -7,7 +7,7 @@ import { createPortal } from "react-dom";
 
 const navigation = [
   { label: "Home", href: "/" },
-  { label: "About Angela", href: "/#about" },
+  { label: "Invitation", href: "/invitation" },
   { label: "Venue", href: "/venue" },
   { label: "Menu", href: "/menu" },
   { label: "Gallery", href: "/gallery" },

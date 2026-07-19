@@ -1,19 +1,23 @@
 import { getAdminGalleryMedia } from "@/app/actions/admin-gallery";
-import { AdminGalleryPanel } from "@/components/admin/AdminGalleryPanel";
+import { getAdminInvitationMedia } from "@/app/actions/admin-invitation";
+import { AdminStudioMedia } from "@/components/admin/AdminStudioMedia";
 import { AdminSectionShell } from "@/components/admin/AdminSectionShell";
 
 export default async function AdminStudioPage() {
-  const items = await getAdminGalleryMedia();
+  const [items, invitation] = await Promise.all([
+    getAdminGalleryMedia(),
+    getAdminInvitationMedia(),
+  ]);
 
   return (
     <AdminSectionShell
       eyebrow="Media"
       title="Studio"
-      description="Upload and publish photos or videos for the public gallery — Angela’s celebration day in Barcelona."
+      description="Publish photos and videos for the gallery, or manage Chris’s invitation video for /invitation."
       publicHref="/gallery"
       publicLabel="Open public gallery"
     >
-      <AdminGalleryPanel initialItems={items} />
+      <AdminStudioMedia galleryItems={items} invitation={invitation} />
     </AdminSectionShell>
   );
 }
