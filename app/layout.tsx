@@ -5,6 +5,7 @@ import {
   Manrope,
   Playfair_Display,
 } from "next/font/google";
+import { SurpriseNotice } from "@/components/SurpriseNotice";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -45,6 +46,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col antialiased" suppressHydrationWarning>
+        <SurpriseNotice />
         {children}
       </body>
     </html>
