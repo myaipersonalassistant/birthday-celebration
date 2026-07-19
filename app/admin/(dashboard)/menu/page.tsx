@@ -9,7 +9,7 @@ export default async function AdminMenuPage() {
     <AdminSectionShell
       eyebrow="Dining"
       title="Menu"
-      description="Kitchen board for Premium Menu choices — mains, desserts, and dietary notes from your guests."
+      description="Kitchen board for the evening dinner at Purobeach · Hilton Diagonal Mar — mains, desserts, and dietary notes."
       publicHref="/menu"
     >
       <AdminMenuPanel initialSubmissions={submissions} />

@@ -39,17 +39,21 @@ export function AboutSection() {
           </div>
 
           <p className="mt-6 text-base leading-relaxed text-[#2a3d4a] sm:text-lg">
-            Angela is a woman whose life reflects faith, kindness and quiet strength. She leads
-            with grace, loves deeply and inspires everyone around her. This celebration is our
-            way of honoring the incredible woman she is and the beautiful impact she continues
-            to make.
+            Angela is a woman whose life reflects faith, kindness, and quiet strength.
+            She has an incredible capacity to serve, leads with grace, loves deeply, and
+            inspires everyone around her.
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-[#2a3d4a] sm:text-lg">
+            This celebration is our way of honouring the incredible woman she is and the
+            beautiful impact she continues to make through the many sacrifices she makes
+            for her family, friends, church community, and everyone she encounters.
           </p>
 
           <a
-            href="#about-more"
+            href="/guestbook"
             className="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-[linear-gradient(180deg,#16384d_0%,#0b2638_100%)] px-10 text-[0.68rem] font-extrabold tracking-[0.18em] text-white uppercase shadow-[0_10px_24px_rgba(11,38,56,0.22)] transition-opacity hover:opacity-90 sm:w-fit sm:self-start"
           >
-            Read More
+            Leave a Message
           </a>
         </div>
       </div>

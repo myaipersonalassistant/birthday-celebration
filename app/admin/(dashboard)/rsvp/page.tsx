@@ -9,7 +9,7 @@ export default async function AdminRsvpPage() {
     <AdminSectionShell
       eyebrow="Guests"
       title="RSVPs"
-      description="See who’s coming — dinner, cruise, plus-ones, and messages from the invitation."
+      description="Who’s joining dinner at Purobeach · Hilton (from 6:30 PM), the Port Olímpic catamaran (marina by 1:00 PM), plus-ones, and messages."
       publicHref="/rsvp"
     >
       <AdminRsvpPanel initialSubmissions={submissions} />

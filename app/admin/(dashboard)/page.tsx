@@ -18,7 +18,7 @@ const sectionCards = [
     key: "menu" as const,
     label: "Menu",
     href: "/admin/menu",
-    description: "Dinner choices",
+    description: "Evening dinner picks",
   },
   {
     key: "guestbook" as const,
@@ -26,48 +26,6 @@ const sectionCards = [
     href: "/admin/guestbook",
     description: "Guest messages",
   },
-];
-
-const quickActions = [
-  {
-    href: "/admin/analytics",
-    label: "View analytics",
-    detail: "RSVPs, menu, guestbook trends",
-  },
-  {
-    href: "/admin/visitors",
-    label: "Guest ledger",
-    detail: "All people across touchpoints",
-  },
-  {
-    href: "/admin/studio",
-    label: "Open studio",
-    detail: "Add photos or videos",
-  },
-  {
-    href: "/admin/rsvp",
-    label: "Review RSVPs",
-    detail: "Dinner, cruise, plus-ones",
-  },
-  {
-    href: "/admin/menu",
-    label: "Kitchen board",
-    detail: "Mains, desserts, dietary",
-  },
-  {
-    href: "/admin/guestbook",
-    label: "Moderate guestbook",
-    detail: "Read or remove notes",
-  },
-];
-
-const publicLinks = [
-  { href: "/", label: "Home" },
-  { href: "/rsvp", label: "RSVP" },
-  { href: "/menu", label: "Menu" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/guestbook", label: "Guestbook" },
-  { href: "/venue", label: "Venue" },
 ];
 
 const typeLabel: Record<string, string> = {
@@ -117,10 +75,10 @@ export default async function AdminOverviewPage() {
         Overview
       </h1>
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#4a5d6a] sm:text-base">
-        A quick pulse on guests, dining, media, and what needs your attention.
+        A quick pulse on guests, Purobeach · Hilton dinner &amp; catamaran plans,
+        media, and what needs your attention.
       </p>
 
-      {/* Celebration pulse */}
       <section className="mt-8 border border-[#061c2b] bg-[#061c2b] px-5 py-6 text-white sm:px-7">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
@@ -128,6 +86,9 @@ export default async function AdminOverviewPage() {
               Celebration pulse
             </p>
             <p className="mt-1 font-logo text-2xl sm:text-3xl">Guest plans</p>
+            <p className="mt-1 text-xs text-white/45">
+              Dinner · Purobeach · Hilton from 6:30 · Cruise · marina by 1:00
+            </p>
           </div>
           <Link
             href="/admin/rsvp"
@@ -140,7 +101,7 @@ export default async function AdminOverviewPage() {
           {[
             { label: "Headcount", value: data.rsvp.headcount },
             { label: "Dinner", value: data.rsvp.dinner },
-            { label: "Cruise", value: data.rsvp.cruise },
+            { label: "Catamaran", value: data.rsvp.cruise },
             { label: "Plus-ones", value: data.rsvp.plusOnes },
           ].map((stat) => (
             <div
@@ -158,7 +119,6 @@ export default async function AdminOverviewPage() {
         </div>
       </section>
 
-      {/* Section counts */}
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         {sectionCards.map((card) => {
           const count = data.counts[card.key];
@@ -196,58 +156,107 @@ export default async function AdminOverviewPage() {
         })}
       </div>
 
-      <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        {/* Attention + activity */}
-        <div className="space-y-6">
-          <section className="border border-[#d8cfbf] bg-white p-5 sm:p-6">
-            <p className="text-[0.65rem] font-bold tracking-[0.14em] text-[#8a7a5c] uppercase">
-              Needs attention
-            </p>
-            {attentionItems.length === 0 ? (
-              <p className="mt-3 text-sm text-[#4a5d6a]">
-                Nothing urgent — drafts published, dietary notes clear, RSVPs
-                flowing in.
+      <div className="mt-8 grid gap-6 lg:grid-cols-2">
+        <section className="flex flex-col border border-[#d8cfbf] bg-white p-5 sm:p-6">
+          <p className="text-[0.65rem] font-bold tracking-[0.14em] text-[#8a7a5c] uppercase">
+            Needs attention
+          </p>
+          {attentionItems.length === 0 ? (
+            <div className="mt-4 flex flex-1 flex-col items-center justify-center border border-dashed border-[#d8ad61]/45 bg-[linear-gradient(180deg,#fffbf3_0%,#fbf8f2_100%)] px-5 py-10 text-center">
+              <span className="grid size-12 place-items-center rounded-full border border-[#d8ad61]/50 bg-white text-[#c99b4e] shadow-[0_8px_24px_rgba(201,155,78,0.12)]">
+                <svg
+                  aria-hidden="true"
+                  className="size-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m5 13 4 4L19 7"
+                  />
+                </svg>
+              </span>
+              <p className="mt-4 font-logo text-xl text-[#061c2b]">All clear</p>
+              <p className="mx-auto mt-2 max-w-[16rem] text-sm leading-relaxed text-[#4a5d6a]">
+                No drafts waiting, no dietary alerts, and RSVPs are in motion.
               </p>
-            ) : (
-              <ul className="mt-4 space-y-3">
-                {attentionItems.map((item) => (
-                  <li key={item.title}>
-                    <Link
-                      href={item.href}
-                      className="block border border-[#d8ad61]/35 bg-[#fff8eb] px-4 py-3 transition hover:border-[#d8ad61]"
-                    >
-                      <p className="font-semibold text-[#061c2b]">{item.title}</p>
-                      <p className="mt-0.5 text-sm text-[#5c4a28]">
-                        {item.detail}
-                      </p>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </section>
-
-          <section className="border border-[#d8cfbf] bg-white p-5 sm:p-6">
-            <div className="flex items-end justify-between gap-3">
-              <p className="text-[0.65rem] font-bold tracking-[0.14em] text-[#8a7a5c] uppercase">
-                Recent activity
+              <p className="mt-4 text-[0.6rem] font-bold tracking-[0.16em] text-[#c99b4e] uppercase">
+                You’re caught up
               </p>
-              <Link
-                href="/admin/visitors"
-                className="text-[0.65rem] font-bold tracking-[0.1em] text-[#061c2b]/55 uppercase transition hover:text-[#d8ad61]"
-              >
-                All people →
-              </Link>
             </div>
-            <p className="mt-1 text-xs text-[#8a7a5c]">
-              Showing the latest 8 events
+          ) : (
+            <ul className="mt-4 space-y-3">
+              {attentionItems.map((item) => (
+                <li key={item.title}>
+                  <Link
+                    href={item.href}
+                    className="block border border-[#d8ad61]/35 bg-[#fff8eb] px-4 py-3 transition hover:border-[#d8ad61]"
+                  >
+                    <p className="font-semibold text-[#061c2b]">{item.title}</p>
+                    <p className="mt-0.5 text-sm text-[#5c4a28]">{item.detail}</p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+
+        <section className="flex flex-col border border-[#d8cfbf] bg-white p-5 sm:p-6">
+          <div className="flex items-end justify-between gap-3">
+            <p className="text-[0.65rem] font-bold tracking-[0.14em] text-[#8a7a5c] uppercase">
+              Recent activity
             </p>
-            {data.activity.length === 0 ? (
-              <p className="mt-3 text-sm text-[#4a5d6a]">
-                Activity will appear here as guests RSVP, choose menus, sign the
-                guestbook, or you upload media.
+            <Link
+              href="/admin/visitors"
+              className="text-[0.65rem] font-bold tracking-[0.1em] text-[#061c2b]/55 uppercase transition hover:text-[#d8ad61]"
+            >
+              All people →
+            </Link>
+          </div>
+          {data.activity.length === 0 ? (
+            <div className="mt-4 flex flex-1 flex-col items-center justify-center border border-dashed border-[#d8cfbf] bg-[#fbf8f2] px-5 py-10 text-center">
+              <span className="grid size-12 place-items-center rounded-full border border-[#061c2b]/12 bg-white text-[#061c2b]/45">
+                <svg
+                  aria-hidden="true"
+                  className="size-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 6v6l3.5 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
+                </svg>
+              </span>
+              <p className="mt-4 font-logo text-xl text-[#061c2b]">
+                Waiting for the first ripple
               </p>
-            ) : (
+              <p className="mx-auto mt-2 max-w-[18rem] text-sm leading-relaxed text-[#4a5d6a]">
+                RSVPs, menu choices, guestbook notes, and studio uploads will
+                show up here as they happen.
+              </p>
+              <div className="mt-5 flex flex-wrap justify-center gap-2">
+                {["RSVP", "Menu", "Guestbook", "Studio"].map((label) => (
+                  <span
+                    key={label}
+                    className="border border-[#061c2b]/10 bg-white px-2.5 py-1 text-[0.58rem] font-bold tracking-[0.12em] text-[#8a7a5c] uppercase"
+                  >
+                    {label}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <>
+              <p className="mt-1 text-xs text-[#8a7a5c]">
+                Showing the latest 8 events
+              </p>
               <ul className="mt-4 divide-y divide-[#ebe4d8]">
                 {data.activity.map((entry) => (
                   <li key={entry.id}>
@@ -270,54 +279,9 @@ export default async function AdminOverviewPage() {
                   </li>
                 ))}
               </ul>
-            )}
-          </section>
-        </div>
-
-        {/* Quick actions + public links */}
-        <div className="space-y-6">
-          <section className="border border-[#d8cfbf] bg-white p-5 sm:p-6">
-            <p className="text-[0.65rem] font-bold tracking-[0.14em] text-[#8a7a5c] uppercase">
-              Quick actions
-            </p>
-            <ul className="mt-4 space-y-2">
-              {quickActions.map((action) => (
-                <li key={action.href}>
-                  <Link
-                    href={action.href}
-                    className="flex items-center justify-between gap-3 border border-[#ebe4d8] px-4 py-3 transition hover:border-[#d8ad61] hover:bg-[#fbf8f2]"
-                  >
-                    <div>
-                      <p className="font-medium text-[#061c2b]">{action.label}</p>
-                      <p className="text-sm text-[#4a5d6a]">{action.detail}</p>
-                    </div>
-                    <span className="text-[#d8ad61]">→</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="border border-[#d8cfbf] bg-white p-5 sm:p-6">
-            <p className="text-[0.65rem] font-bold tracking-[0.14em] text-[#8a7a5c] uppercase">
-              Public pages
-            </p>
-            <p className="mt-2 text-sm text-[#4a5d6a]">
-              Jump to the guest-facing site to preview what visitors see.
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {publicLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="border border-[#061c2b]/15 px-3 py-2 text-[0.65rem] font-bold tracking-[0.1em] text-[#061c2b] uppercase transition hover:border-[#d8ad61] hover:text-[#d8ad61]"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </section>
-        </div>
+            </>
+          )}
+        </section>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { VenuePageContent } from "@/components/VenuePageContent";
 export const metadata: Metadata = {
   title: "Venue & Hotels | Angela Ifonlaja",
   description:
-    "Purobeach Barcelona at Hilton Diagonal Mar — directions and nearby hotels for Angela's birthday celebration.",
+    "Port Olímpic marina for the catamaran, Purobeach at Hilton Diagonal Mar for dinner, nearby hotels, and more Barcelona options on GetYourGuide.",
 };
 
 export default function VenuePage() {

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Countdown } from "@/components/Countdown";
 import { AboutSection } from "@/components/AboutSection";
+import { DayPlanSection } from "@/components/DayPlanSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { FindUsSection } from "@/components/FindUsSection";
 import { Footer } from "@/components/Footer";
@@ -87,7 +88,7 @@ export default function Home() {
         <div className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(3,17,28,0.10),transparent_38%,rgba(3,19,31,0.30)_80%,rgba(6,28,43,0.65)_100%)]" />
 
         <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 px-6 pt-28 pb-10 sm:px-10 lg:h-[650px] lg:min-h-0 lg:grid-cols-[1.05fr_0.95fr] lg:px-12 lg:pt-32 lg:pb-48 xl:px-16">
-          <div className="z-10 flex items-center lg:translate-x-12 lg:translate-y-10">
+          <div className="z-10 flex items-center lg:translate-x-15 lg:translate-y-10">
             <div className="max-w-[650px] pb-4 lg:pb-6">
               <p className="font-logo text-lg leading-[1.12] font-semibold tracking-[0.18em] text-[#e3bd76] uppercase sm:text-2xl">
                 Appreciation &amp;
@@ -117,7 +118,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-2">
                   <ClockIcon className="size-5 text-[#d9ad61]" />
-                  <span>7:00 PM</span>
+                  <span>6:30 PM</span>
                 </div>
               </div>
 
@@ -141,14 +142,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative z-[5] mt-1 flex justify-center pt-4 lg:pointer-events-none lg:absolute lg:inset-x-0 lg:top-24 lg:right-[8%] lg:bottom-0 lg:left-auto lg:mt-0 lg:w-[58%] lg:items-end lg:justify-end lg:pt-0">
+          <div className="relative z-[5] mt-1 flex justify-center pt-4 lg:pointer-events-none lg:absolute lg:inset-x-0 lg:top-24 lg:right-[17%] lg:bottom-0 lg:left-auto lg:mt-0 lg:w-[58%] lg:items-end lg:justify-end lg:pt-0">
             <Image
-              src="/angela-bg.png"
+              src="/angelabg.png"
               alt="Angela Ifonlaja"
               width={500}
               height={514}
               priority
-              className="h-auto max-h-[58vh] w-auto max-w-[92vw] object-contain object-top drop-shadow-[0_20px_35px_rgba(0,0,0,0.5)] lg:h-[86%] lg:max-h-none lg:max-w-none lg:object-bottom lg:-translate-y-8"
+              className="h-auto max-h-[58vh] w-auto max-w-[92vw] translate-y-6 -mb-10 object-contain object-top drop-shadow-[0_20px_35px_rgba(0,0,0,0.5)] lg:mb-0 lg:h-[86%] lg:max-h-none lg:max-w-none lg:translate-y-0 lg:object-bottom lg:-translate-y-8"
             />
           </div>
         </div>
@@ -173,21 +174,29 @@ export default function Home() {
           />
         </svg>
 
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-          <Image
-            src="/left.png"
-            alt=""
-            width={707}
-            height={345}
-            className="absolute -bottom-[20%] -left-[3%] h-[135%] w-auto max-w-none object-contain opacity-[0.16]"
-          />
-          <Image
-            src="/right.png"
-            alt=""
-            width={722}
-            height={346}
-            className="absolute -right-[3%] -bottom-[20%] h-[135%] w-auto max-w-none object-contain opacity-[0.16]"
-          />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 grid grid-cols-3"
+        >
+          <div className="relative overflow-hidden">
+            <Image
+              src="/left.png"
+              alt=""
+              width={707}
+              height={345}
+              className="absolute top-1/2 left-0 h-[92%] w-auto max-w-full -translate-y-1/2 object-contain object-left opacity-[0.16]"
+            />
+          </div>
+          <div />
+          <div className="relative overflow-hidden">
+            <Image
+              src="/right.png"
+              alt=""
+              width={722}
+              height={346}
+              className="absolute top-1/2 right-0 h-[92%] w-auto max-w-full -translate-y-1/2 object-contain object-right opacity-[0.16]"
+            />
+          </div>
         </div>
 
         <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-4 sm:gap-5">
@@ -204,6 +213,7 @@ export default function Home() {
       <ExperienceSection />
       <VenueSection />
       <AboutSection />
+      <DayPlanSection />
       <section
         aria-labelledby="rsvp-heading"
         className="grid lg:grid-cols-2 lg:items-stretch"

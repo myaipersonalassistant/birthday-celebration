@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const slides = [
   { src: "/next1.png", alt: "Purobeach Barcelona venue view" },
-  { src: "/next2.png", alt: "Purobeach Barcelona terrace" },
+  { src: "/next2.png", alt: "Purobeach Barcelona terrace at Hilton Diagonal Mar" },
   { src: "/next3.png", alt: "Purobeach Barcelona evening ambiance" },
 ];
 
@@ -75,7 +75,9 @@ export function VenueSection() {
 
       <div className="relative mx-auto flex h-full w-full max-w-[1440px] items-center px-6 py-10 sm:px-10 lg:px-16">
         <div className="max-w-lg">
-          <p className="font-script text-2xl leading-none text-[#d8ad61] sm:text-3xl">Our Venue</p>
+          <p className="font-script text-2xl leading-none text-[#d8ad61] sm:text-3xl">
+            Evening celebration
+          </p>
 
           <h2
             id="venue-heading"
@@ -85,7 +87,12 @@ export function VenueSection() {
           </h2>
 
           <p className="mt-1.5 font-logo text-base leading-snug text-white/95 sm:text-xl">
-            Hilton Diagonal Mar Barcelona
+            Hilton Diagonal Mar · arrive by 6:30 PM
+          </p>
+
+          <p className="mt-3 max-w-md text-sm leading-relaxed text-white/75">
+            Birthday dinner, fellowship, music, and speeches. Dress code:
+            elegant.
           </p>
 
           <div className="mt-5 flex items-start gap-3">

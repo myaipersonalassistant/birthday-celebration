@@ -196,7 +196,8 @@ export function MenuForm() {
           </h3>
           <p className="relative mt-3 animate-[menuItemRise_0.5s_ease-out_0.24s_both] text-sm leading-relaxed text-white/75">
             Your {activeMenu.title.toLowerCase()} choices are saved
-            {successName ? `, ${successName}` : ""}. We can’t wait to dine with you in Barcelona.
+            {successName ? `, ${successName}` : ""}. We can’t wait to dine with you at
+            Purobeach · Hilton Diagonal Mar from 6:30&nbsp;PM.
           </p>
           <button
             type="button"

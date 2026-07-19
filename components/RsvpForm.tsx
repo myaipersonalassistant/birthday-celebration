@@ -6,9 +6,21 @@ import { useState } from "react";
 import { RsvpInteractiveForm } from "@/components/RsvpInteractiveForm";
 
 const dayMoments = [
-  { time: "3:30 PM", title: "Catamaran Cruise", detail: "Sail the Barcelona coast together" },
-  { time: "7:00 PM", title: "Dinner Celebration", detail: "Purobeach · Hilton Diagonal Mar" },
-  { time: "Evening", title: "Under the Stars", detail: "Music, memories, and champagne light" },
+  {
+    time: "1:00 PM",
+    title: "Marina Arrival",
+    detail: "Port Olímpic · boarding & welcome",
+  },
+  {
+    time: "2:00 PM",
+    title: "Catamaran Cruise",
+    detail: "One-hour sail · music, drinks & snacks",
+  },
+  {
+    time: "6:30 PM",
+    title: "Evening Celebration",
+    detail: "Purobeach · Hilton · elegant dress",
+  },
 ];
 
 export function RsvpForm() {
@@ -69,7 +81,10 @@ export function RsvpForm() {
               <div className="space-y-5 p-5 sm:p-6">
                 <div>
                   <p className="font-script text-2xl text-[#d8ad61]">7 August 2026</p>
-                  <p className="mt-1 font-logo text-2xl">Barcelona awaits</p>
+                  <p className="mt-1 font-logo text-2xl">Welcome to Barcelona</p>
+                  <p className="mt-1 text-xs leading-relaxed text-white/65">
+                    Delighted you’re joining Angela’s celebration.
+                  </p>
                 </div>
 
                 <div>

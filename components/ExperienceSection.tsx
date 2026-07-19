@@ -89,25 +89,29 @@ function ExperienceIcon({ name }: ExperienceIconProps) {
 const experiences = [
   {
     icon: "cruise" as const,
-    title: "Mediterranean Cruise",
+    title: "Private Catamaran",
+    detail: "2:00 – 3:00 PM · Port Olímpic",
     image: "/1.png",
     alt: "Luxury catamaran sailing along the Barcelona coast",
   },
   {
     icon: "dinner" as const,
-    title: "Dinner Under the Stars",
+    title: "Birthday Dinner",
+    detail: "From 6:30 PM · Purobeach · Hilton",
     image: "/2.png",
     alt: "Candlelit seaside dinner under palm trees",
   },
   {
     icon: "birthday" as const,
-    title: "Birthday Celebration",
+    title: "Celebration",
+    detail: "Music, speeches & fellowship",
     image: "/3.png",
     alt: "Elegant birthday cake surrounded by candles",
   },
   {
     icon: "memories" as const,
     title: "Memories Together",
+    detail: "Dress code · Elegant",
     image: "/4.png",
     alt: "Friends raising champagne glasses in celebration",
   },
@@ -128,6 +132,10 @@ export function ExperienceSection() {
         >
           The Experience
         </h2>
+        <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-[#4a5d6a]">
+          A day by the sea and an evening of celebration — cruise, free time to
+          freshen up, then dinner at Purobeach · Hilton Diagonal Mar.
+        </p>
         <div className="mx-auto mt-4 h-px w-12 bg-[#c99b4e]" />
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -141,6 +149,9 @@ export function ExperienceSection() {
                 <h3 className="mt-3 max-w-48 font-logo text-lg leading-[1.05] font-semibold tracking-[0.04em] uppercase sm:text-xl">
                   {experience.title}
                 </h3>
+                <p className="mt-2 text-xs tracking-[0.04em] text-[#6b7c88]">
+                  {experience.detail}
+                </p>
               </div>
 
               <div className="relative aspect-[4/3] overflow-hidden">

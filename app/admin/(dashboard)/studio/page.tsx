@@ -9,6 +9,7 @@ export default async function AdminStudioPage() {
     <AdminSectionShell
       eyebrow="Media"
       title="Studio"
+      description="Upload and publish photos or videos for the public gallery — Angela’s celebration day in Barcelona."
       publicHref="/gallery"
       publicLabel="Open public gallery"
     >

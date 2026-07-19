@@ -40,8 +40,8 @@ export default function AdminLoginPage() {
               celebration admin
             </p>
             <p className="mt-5 max-w-sm animate-[menuItemRise_0.75s_ease-out_0.15s_both] text-sm leading-relaxed text-white/60 sm:text-base">
-              Sign in to manage studio media, RSVPs, menu choices, and guestbook
-              messages.
+              Sign in to manage studio media, Purobeach · Hilton dinner &amp;
+              catamaran RSVPs, evening menu choices, and guestbook messages.
             </p>
             <div className="mt-6 h-px w-12 bg-[#d8ad61] animate-[menuItemRise_0.75s_ease-out_0.2s_both]" />
           </div>

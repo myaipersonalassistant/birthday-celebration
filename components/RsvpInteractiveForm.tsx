@@ -201,8 +201,8 @@ export function RsvpInteractiveForm({
           </h3>
           <p className="relative mt-3 animate-[menuItemRise_0.5s_ease-out_0.24s_both] text-sm leading-relaxed text-white/75">
             {successName
-              ? `${successName}, we can’t wait to celebrate Angela with you in Barcelona.`
-              : "We can’t wait to celebrate Angela with you in Barcelona."}
+              ? `${successName}, we can’t wait to celebrate Angela with you in Barcelona. Please arrive at Purobeach · Hilton Diagonal Mar by 6:30 PM if you’re joining dinner.`
+              : "We can’t wait to celebrate Angela with you in Barcelona. Please arrive at Purobeach · Hilton Diagonal Mar by 6:30 PM if you’re joining dinner."}
           </p>
           <div className="relative mt-7 flex flex-wrap justify-center gap-3">
             <Link
@@ -423,8 +423,8 @@ export function RsvpInteractiveForm({
             >
               <p className={hintClass}>
                 {displayName
-                  ? `${displayName}, choose the moments you’ll join — dinner, cruise, or both.`
-                  : "Choose the moments you’ll join — dinner, cruise, or both."}
+                  ? `${displayName}, choose the moments you’ll join — evening dinner, afternoon cruise, or both.`
+                  : "Choose the moments you’ll join — evening dinner, afternoon cruise, or both."}
               </p>
 
               <button
@@ -438,15 +438,24 @@ export function RsvpInteractiveForm({
                 <span
                   className={`mt-1 block text-sm ${
                     attendDinner
-                      ? isDark
-                        ? "text-white/70"
-                        : "text-white/70"
+                      ? "text-white/70"
                       : isDark
                         ? "text-white/55"
                         : "text-[#4a5d6a]"
                   }`}
                 >
-                  7:00 PM · Purobeach Barcelona
+                  Arrive by 6:30 PM · Purobeach · Hilton Diagonal Mar
+                </span>
+                <span
+                  className={`mt-1.5 block text-xs leading-relaxed ${
+                    attendDinner
+                      ? "text-white/55"
+                      : isDark
+                        ? "text-white/40"
+                        : "text-[#6b7c88]"
+                  }`}
+                >
+                  Birthday dinner, fellowship &amp; speeches · dress code elegant
                 </span>
               </button>
 
@@ -467,9 +476,31 @@ export function RsvpInteractiveForm({
                         : "text-[#4a5d6a]"
                   }`}
                 >
-                  3:30 PM – 6:00 PM · Barcelona coast
+                  Marina by 1:00 PM · sail 2:00–3:00 PM
+                </span>
+                <span
+                  className={`mt-1.5 block text-xs leading-relaxed ${
+                    joinCruise
+                      ? "text-white/55"
+                      : isDark
+                        ? "text-white/40"
+                        : "text-[#6b7c88]"
+                  }`}
+                >
+                  Port Olímpic · private sail with music, welcome drinks &amp; snacks
                 </span>
               </button>
+
+              {joinCruise && (
+                <p
+                  className={`animate-[menuItemRise_0.35s_ease-out] text-xs leading-relaxed ${
+                    isDark ? "text-white/55" : "text-[#4a5d6a]"
+                  }`}
+                >
+                  After the cruise (3:00–6:30 PM), return to your hotel, explore, or freshen up
+                  before dinner.
+                </p>
+              )}
 
               <label
                 className={`flex items-start gap-3 border px-4 py-4 ${
@@ -530,15 +561,26 @@ export function RsvpInteractiveForm({
                   }`}
                 >
                   <p>
-                    <span className="text-[#d8ad61]">Dinner:</span> {attendDinner ? "Yes" : "No"}
+                    <span className="text-[#d8ad61]">Dinner:</span>{" "}
+                    {attendDinner
+                      ? "Yes · Purobeach · Hilton from 6:30 PM"
+                      : "No"}
                   </p>
                   <p>
-                    <span className="text-[#d8ad61]">Cruise:</span> {joinCruise ? "Yes" : "No"}
+                    <span className="text-[#d8ad61]">Cruise:</span>{" "}
+                    {joinCruise
+                      ? "Yes · marina 1:00 PM, sail 2:00–3:00 PM"
+                      : "No"}
                   </p>
                   <p>
                     <span className="text-[#d8ad61]">Guest:</span>{" "}
                     {bringingGuest ? guestName || "Yes" : "No"}
                   </p>
+                  {attendDinner && (
+                    <p className={`pt-1 text-xs ${isDark ? "text-white/50" : "text-[#6b7c88]"}`}>
+                      Dress code: elegant
+                    </p>
+                  )}
                 </div>
               </div>
 

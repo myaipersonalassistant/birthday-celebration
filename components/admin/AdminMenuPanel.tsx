@@ -191,10 +191,10 @@ export function AdminMenuPanel({ initialSubmissions }: AdminMenuPanelProps) {
                 Kitchen board
               </p>
               <h2 className="mt-1 font-logo text-3xl tracking-[-0.02em] sm:text-4xl">
-                Tonight’s counts
+                Evening dinner counts
               </h2>
               <p className="mt-2 text-sm text-white/55">
-                Tap a dish to filter the guest list ·{" "}
+                Purobeach · Hilton from 6:30 PM · tap a dish to filter ·{" "}
                 <span className="text-[#d8ad61]">
                   {submissions.length} response
                   {submissions.length === 1 ? "" : "s"}
@@ -344,7 +344,7 @@ export function AdminMenuPanel({ initialSubmissions }: AdminMenuPanelProps) {
           <div className="border border-[#d8cfbf] bg-white px-6 py-16 text-center">
             <p className="font-logo text-2xl text-[#061c2b]">No choices yet</p>
             <p className="mx-auto mt-2 max-w-md text-sm text-[#4a5d6a]">
-              When guests submit the Premium Menu form, their mains and desserts
+              When guests submit the evening dinner menu, their mains and desserts
               will appear on this kitchen board.
             </p>
           </div>

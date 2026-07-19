@@ -440,8 +440,8 @@ export function AdminVisitorsPanel({
                 selected.bringingGuest != null) && (
                 <DetailSection title="Celebration plans">
                   <div className="flex flex-wrap gap-2">
-                    <PlanChip active={selected.attendDinner} label="Dinner" />
-                    <PlanChip active={selected.joinCruise} label="Cruise" />
+                    <PlanChip active={selected.attendDinner} label="Dinner · Purobeach" />
+                    <PlanChip active={selected.joinCruise} label="Cruise · Marina" />
                     {selected.bringingGuest != null && (
                       <span
                         className={`px-2.5 py-1 text-[0.58rem] font-bold tracking-[0.1em] uppercase ${

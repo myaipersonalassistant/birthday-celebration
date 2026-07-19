@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 const navigation = [
-  { label: "Home", href: "/#hero" },
+  { label: "Home", href: "/" },
   { label: "About Angela", href: "/#about" },
   { label: "Venue", href: "/venue" },
   { label: "Menu", href: "/menu" },
@@ -101,7 +101,7 @@ export function Header() {
       >
         <div className="relative z-50 mx-auto flex h-20 w-full max-w-[1440px] items-center justify-between gap-5 px-4 sm:px-8 lg:h-24 lg:px-12 xl:px-16">
           <Link
-            href="/#hero"
+            href="/"
             aria-label="Celebrate Angela—home"
             className="relative block h-14 w-36 shrink-0 sm:h-16 sm:w-40"
             onClick={() => setIsMenuOpen(false)}

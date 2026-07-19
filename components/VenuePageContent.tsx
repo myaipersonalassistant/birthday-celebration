@@ -1,6 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { arrivalNotes, nearbyHotels, venueDetails } from "@/lib/venue-data";
+import {
+  arrivalNotes,
+  eveningVenue,
+  eventDateLabel,
+  exploreBarcelonaUrl,
+  marinaVenue,
+  nearbyHotels,
+} from "@/lib/venue-data";
 
 function LocationPin({ className }: { className?: string }) {
   return (
@@ -26,7 +33,7 @@ export function VenuePageContent() {
       <section className="relative isolate min-h-[72vh] overflow-hidden text-white">
         <Image
           src="/next1.png"
-          alt="Purobeach Barcelona at dusk"
+          alt="Purobeach Barcelona at Hilton Diagonal Mar waterfront"
           fill
           priority
           sizes="100vw"
@@ -37,27 +44,32 @@ export function VenuePageContent() {
 
         <div className="relative mx-auto flex min-h-[72vh] w-full max-w-[1240px] flex-col justify-end px-5 pb-14 pt-32 sm:px-8 sm:pb-16 lg:px-12">
           <p className="animate-[menuItemRise_0.7s_ease-out_both] text-xs font-bold tracking-[0.22em] text-[#d8ad61] uppercase">
-            Celebration Destination
+            {eventDateLabel}
           </p>
           <h1 className="mt-3 max-w-3xl animate-[menuItemRise_0.75s_ease-out_0.08s_both] font-logo text-[clamp(2.6rem,7vw,5rem)] leading-[0.95] font-medium tracking-[-0.03em]">
-            {venueDetails.name}
+            Where We Gather
           </h1>
           <p className="mt-3 animate-[menuItemRise_0.75s_ease-out_0.14s_both] font-script text-3xl text-[#d8ad61] sm:text-4xl">
-            where the evening begins
+            Marina by day · Purobeach & Hilton by evening
           </p>
           <p className="mt-5 max-w-xl animate-[menuItemRise_0.75s_ease-out_0.2s_both] text-sm leading-relaxed text-white/80 sm:text-base">
-            A Mediterranean beach club at {venueDetails.host} — sand, skyline, and golden hour
-            for Angela’s birthday in Barcelona.
+            A private catamaran from Port Olímpic, then Angela’s birthday dinner at
+            Purobeach Barcelona · Hilton Diagonal Mar. Dress code for the evening:
+            elegant.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3 animate-[menuItemRise_0.75s_ease-out_0.28s_both]">
             <a
-              href={venueDetails.mapsUrl}
-              target="_blank"
-              rel="noreferrer"
+              href="#day-marina"
               className="inline-flex min-h-11 items-center justify-center rounded-sm bg-[#d7ad62] px-7 text-[0.68rem] font-extrabold tracking-[0.16em] text-[#102536] uppercase transition-colors hover:bg-[#edca87]"
             >
-              Get Directions
+              Day · Marina
+            </a>
+            <a
+              href="#evening-hilton"
+              className="inline-flex min-h-11 items-center justify-center border border-white/30 px-7 text-[0.68rem] font-extrabold tracking-[0.16em] text-white uppercase transition-colors hover:border-[#d8ad61] hover:text-[#d8ad61]"
+            >
+              Evening · Purobeach
             </a>
             <a
               href="#stay-nearby"
@@ -69,31 +81,58 @@ export function VenuePageContent() {
         </div>
       </section>
 
-      <section className="bg-[#f7f3eb] px-5 py-14 text-[#0b2638] sm:px-8 sm:py-16 lg:px-12">
+      <section
+        id="day-marina"
+        className="bg-[#f7f3eb] px-5 py-14 text-[#0b2638] sm:px-8 sm:py-16 lg:px-12"
+      >
         <div className="mx-auto grid max-w-[1240px] items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <div>
-            <p className="font-script text-2xl text-[#c99b4e]">The Setting</p>
+            <p className="font-script text-2xl text-[#c99b4e]">{marinaVenue.scriptLabel}</p>
             <h2 className="mt-2 font-logo text-[clamp(1.9rem,4vw,3rem)] font-medium tracking-[-0.02em]">
-              Hilton Diagonal Mar
+              {marinaVenue.name}
             </h2>
             <WaveDivider />
-            <p className="mt-6 text-sm leading-relaxed text-[#4a5d6a] sm:text-base">
-              Purobeach unfolds along Barcelona’s eastern shoreline — open terraces, sea air, and
-              that soft coastal light that turns evenings golden. The celebration gathers here on{" "}
-              {venueDetails.dateLabel}, from {venueDetails.timeLabel}.
+            <p className="mt-4 text-sm font-semibold tracking-[0.04em] text-[#0b2638] sm:text-base">
+              {marinaVenue.timeLabel}
+              <span className="mx-2 text-[#c99b4e]">·</span>
+              {marinaVenue.sailWindow}
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-[#4a5d6a] sm:text-base">
+              {marinaVenue.blurb}
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-[#4a5d6a] sm:text-base">
+              {marinaVenue.freeTimeNote}
             </p>
 
             <div className="mt-8 flex items-start gap-3 border-l-2 border-[#d8ad61] pl-4">
               <LocationPin className="mt-0.5 size-6 shrink-0 text-[#c99b4e]" />
               <div>
-                <p className="font-logo text-lg font-semibold">{venueDetails.host}</p>
-                {venueDetails.addressLines.map((line) => (
+                <p className="font-logo text-lg font-semibold">Meeting point</p>
+                {marinaVenue.addressLines.map((line) => (
                   <p key={line} className="text-sm text-[#4a5d6a]">
                     {line}
                   </p>
                 ))}
               </div>
             </div>
+
+            <div className="mt-6">
+              <p className="text-[0.65rem] font-bold tracking-[0.16em] text-[#8a7348] uppercase">
+                Boats (one of)
+              </p>
+              <p className="mt-2 text-sm text-[#0b2638]">
+                {marinaVenue.boatNames.join(" · ")}
+              </p>
+            </div>
+
+            <a
+              href={marinaVenue.mapsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-8 inline-flex min-h-11 items-center justify-center rounded-sm bg-[#061c2b] px-7 text-[0.68rem] font-extrabold tracking-[0.16em] text-white uppercase transition-opacity hover:opacity-90"
+            >
+              Marina Directions
+            </a>
           </div>
 
           <div className="relative">
@@ -101,8 +140,8 @@ export function VenuePageContent() {
             <div className="absolute -right-3 -bottom-3 h-16 w-16 border-r border-b border-[#d8ad61]/70" />
             <div className="relative aspect-[4/3] overflow-hidden">
               <Image
-                src="/next2.png"
-                alt="Purobeach Barcelona terrace"
+                src="/1.png"
+                alt="Catamaran along the Barcelona coast"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition-transform duration-700 hover:scale-[1.03]"
@@ -112,44 +151,149 @@ export function VenuePageContent() {
         </div>
       </section>
 
-      <section className="bg-[#061c2b] px-5 py-14 text-white sm:px-8 sm:py-16 lg:px-12">
+      <section
+        id="evening-hilton"
+        className="bg-[#061c2b] px-5 py-14 text-white sm:px-8 sm:py-16 lg:px-12"
+      >
+        <div className="mx-auto grid max-w-[1240px] items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          <div className="relative order-2 lg:order-1">
+            <div className="absolute -top-3 -left-3 h-16 w-16 border-t border-l border-[#d8ad61]/70" />
+            <div className="absolute -right-3 -bottom-3 h-16 w-16 border-r border-b border-[#d8ad61]/70" />
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <Image
+                src="/next2.png"
+                alt="Purobeach Barcelona at Hilton Diagonal Mar"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 hover:scale-[1.03]"
+              />
+            </div>
+          </div>
+
+          <div className="order-1 lg:order-2">
+            <p className="font-script text-2xl text-[#d8ad61]">{eveningVenue.scriptLabel}</p>
+            <h2 className="mt-2 font-logo text-[clamp(1.9rem,4vw,3rem)] font-medium tracking-[-0.02em]">
+              {eveningVenue.name}
+            </h2>
+            <p className="mt-2 font-logo text-base text-white/90 sm:text-xl">
+              {eveningVenue.host}
+            </p>
+            <div className="mt-4 flex items-center gap-3" aria-hidden="true">
+              <span className="h-px w-10 bg-[#d8ad61]/50" />
+              <span className="size-1.5 rotate-45 bg-[#d8ad61]" />
+              <span className="h-px w-10 bg-[#d8ad61]/50" />
+            </div>
+            <p className="mt-4 text-sm font-semibold tracking-[0.04em] text-white sm:text-base">
+              {eveningVenue.timeLabel}
+              <span className="mx-2 text-[#d8ad61]">·</span>
+              Dress code · {eveningVenue.dressCode}
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-white/75 sm:text-base">
+              {eveningVenue.blurb}
+            </p>
+
+            <div className="mt-8 flex items-start gap-3 border-l-2 border-[#d8ad61] pl-4">
+              <LocationPin className="mt-0.5 size-6 shrink-0 text-[#d8ad61]" />
+              <div>
+                <p className="font-logo text-lg font-semibold">{eveningVenue.shortLabel}</p>
+                {eveningVenue.addressLines.map((line) => (
+                  <p key={line} className="text-sm text-white/70">
+                    {line}
+                  </p>
+                ))}
+              </div>
+            </div>
+
+            <a
+              href={eveningVenue.mapsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-8 inline-flex min-h-11 items-center justify-center rounded-sm bg-[#d7ad62] px-7 text-[0.68rem] font-extrabold tracking-[0.16em] text-[#102536] uppercase transition-colors hover:bg-[#edca87]"
+            >
+              Evening Directions
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#f7f3eb] px-5 py-14 text-[#0b2638] sm:px-8 sm:py-16 lg:px-12">
         <div className="mx-auto max-w-[1240px]">
           <div className="text-center">
-            <p className="text-xs font-bold tracking-[0.2em] text-[#d8ad61] uppercase">
+            <p className="text-xs font-bold tracking-[0.2em] text-[#c99b4e] uppercase">
               Getting There
             </p>
             <h2 className="mt-3 font-logo text-[clamp(1.8rem,4vw,2.8rem)] font-medium">
-              Arrive with ease
+              Two places · one celebration
             </h2>
-            <div className="mx-auto mt-4 h-px w-12 bg-[#d8ad61]" />
+            <div className="mx-auto mt-4 h-px w-12 bg-[#c99b4e]" />
           </div>
 
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {arrivalNotes.map((note, index) => (
               <article
                 key={note.title}
-                className="border border-white/10 bg-white/5 px-5 py-6 transition-colors duration-300 hover:border-[#d8ad61]/45 hover:bg-white/[0.07]"
-                style={{ animationDelay: `${index * 80}ms` }}
+                className="border border-[#d8cfbf] bg-white px-5 py-6 shadow-[0_10px_28px_rgba(11,38,56,0.05)] transition-colors duration-300 hover:border-[#d8ad61]/70"
               >
-                <p className="font-display text-[0.65rem] tracking-[0.18em] text-[#d8ad61] uppercase">
+                <p className="font-display text-[0.65rem] tracking-[0.18em] text-[#c99b4e] uppercase">
                   0{index + 1}
                 </p>
                 <h3 className="mt-3 font-logo text-xl font-semibold">{note.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/70">{note.detail}</p>
+                <p className="mt-3 text-sm leading-relaxed text-[#4a5d6a]">{note.detail}</p>
               </article>
             ))}
           </div>
 
-          <div className="mt-10 overflow-hidden border border-white/10">
-            <div className="relative min-h-[260px] sm:min-h-[340px]">
-              <iframe
-                title="Map to Purobeach Barcelona"
-                src={venueDetails.mapEmbedUrl}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 h-full w-full border-0"
-                allowFullScreen
-              />
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            <div className="overflow-hidden border border-[#d8cfbf] bg-white">
+              <div className="flex items-center justify-between gap-3 border-b border-[#e8e0d2] px-4 py-3">
+                <p className="text-[0.65rem] font-bold tracking-[0.14em] text-[#0b2638] uppercase">
+                  Day · Port Olímpic
+                </p>
+                <a
+                  href={marinaVenue.mapsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[0.62rem] font-bold tracking-[0.12em] text-[#c99b4e] uppercase underline-offset-4 hover:underline"
+                >
+                  Open maps
+                </a>
+              </div>
+              <div className="relative min-h-[220px] sm:min-h-[280px]">
+                <iframe
+                  title="Map to Port Olímpic marina"
+                  src={marinaVenue.mapEmbedUrl}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 h-full w-full border-0"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+
+            <div className="overflow-hidden border border-[#d8cfbf] bg-white">
+              <div className="flex items-center justify-between gap-3 border-b border-[#e8e0d2] px-4 py-3">
+                <p className="text-[0.65rem] font-bold tracking-[0.14em] text-[#0b2638] uppercase">
+                  Evening · Purobeach & Hilton
+                </p>
+                <a
+                  href={eveningVenue.mapsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[0.62rem] font-bold tracking-[0.12em] text-[#c99b4e] uppercase underline-offset-4 hover:underline"
+                >
+                  Open maps
+                </a>
+              </div>
+              <div className="relative min-h-[220px] sm:min-h-[280px]">
+                <iframe
+                  title="Map to Purobeach Barcelona at Hilton Diagonal Mar"
+                  src={eveningVenue.mapEmbedUrl}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 h-full w-full border-0"
+                  allowFullScreen
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -157,25 +301,44 @@ export function VenuePageContent() {
 
       <section
         id="stay-nearby"
-        className="bg-[#f7f3eb] px-5 py-14 text-[#0b2638] sm:px-8 sm:py-16 lg:px-12"
+        className="bg-[#061c2b] px-5 py-14 text-white sm:px-8 sm:py-16 lg:px-12"
       >
         <div className="mx-auto max-w-[1240px]">
-          <div className="max-w-2xl">
-            <p className="font-script text-2xl text-[#c99b4e]">Where to Stay</p>
-            <h2 className="mt-2 font-logo text-[clamp(1.9rem,4vw,3rem)] font-medium tracking-[-0.02em]">
-              Hotels very close to the venue
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-[#4a5d6a] sm:text-base">
-              Six nearby stays within a short walk — or a quick taxi — of Purobeach and Hilton
-              Diagonal Mar. Book early for August.
-            </p>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <p className="font-script text-2xl text-[#d8ad61]">Where to Stay</p>
+              <h2 className="mt-2 font-logo text-[clamp(1.9rem,4vw,3rem)] font-medium tracking-[-0.02em]">
+                Hotels near Purobeach, Hilton &amp; the marina
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-white/70 sm:text-base">
+                Six recommended stays close to the celebration. Prefer something else?
+                Browse more options on GetYourGuide.
+              </p>
+            </div>
+            <a
+              href={exploreBarcelonaUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="group relative inline-flex min-h-12 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-[#d7ad62] px-7 text-[0.68rem] font-extrabold tracking-[0.16em] text-[#102536] uppercase transition-all duration-300 hover:scale-[1.02] hover:bg-[#edca87] sm:self-start lg:self-end"
+            >
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/35 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+              />
+              <span className="relative inline-flex items-center gap-2">
+                More on GetYourGuide
+                <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+                  →
+                </span>
+              </span>
+            </a>
           </div>
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {nearbyHotels.map((hotel) => (
               <article
                 key={hotel.id}
-                className="group flex flex-col overflow-hidden border border-[#d8cfbf] bg-white shadow-[0_12px_30px_rgba(11,38,56,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#d8ad61]/70 hover:shadow-[0_18px_40px_rgba(11,38,56,0.1)]"
+                className="group flex flex-col overflow-hidden border border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:border-[#d8ad61]/45 hover:bg-white/[0.07]"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
@@ -188,7 +351,7 @@ export function VenuePageContent() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#061c2b]/55 via-transparent to-transparent" />
                   {hotel.featured && (
                     <span className="absolute top-3 left-3 bg-[#d7ad62] px-2.5 py-1 text-[0.58rem] font-extrabold tracking-[0.12em] text-[#102536] uppercase">
-                      Closest
+                      Evening venue
                     </span>
                   )}
                   <span className="absolute right-3 bottom-3 bg-[#061c2b]/80 px-2.5 py-1 text-[0.58rem] font-bold tracking-[0.12em] text-[#d8ad61] uppercase backdrop-blur-sm">
@@ -198,26 +361,26 @@ export function VenuePageContent() {
 
                 <div className="flex flex-1 flex-col px-5 py-5">
                   <div className="flex items-start justify-between gap-3">
-                    <p className="text-[0.62rem] tracking-[0.08em] text-[#4a5d6a] uppercase">
+                    <p className="text-[0.62rem] tracking-[0.08em] text-white/55 uppercase">
                       {hotel.distance}
                     </p>
-                    <p className="text-[0.62rem] tracking-[0.08em] text-[#8a7348] uppercase">
+                    <p className="text-[0.62rem] tracking-[0.08em] text-[#d8ad61]/80 uppercase">
                       {hotel.area}
                     </p>
                   </div>
                   <h3 className="mt-2 font-logo text-xl font-semibold leading-snug">
                     {hotel.name}
                   </h3>
-                  <p className="mt-1 text-xs italic text-[#8a7348]">{hotel.vibe}</p>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-[#4a5d6a]">
+                  <p className="mt-1 text-xs italic text-[#d8ad61]/90">{hotel.vibe}</p>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-white/70">
                     {hotel.highlight}
                   </p>
-                  <div className="mt-5 flex flex-wrap gap-4 border-t border-[#e8e0d2] pt-4">
+                  <div className="mt-5 flex flex-wrap gap-4 border-t border-white/10 pt-4">
                     <a
                       href={hotel.bookingUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[0.65rem] font-extrabold tracking-[0.14em] text-[#061c2b] uppercase underline-offset-4 transition-colors hover:text-[#c99b4e] hover:underline"
+                      className="text-[0.65rem] font-extrabold tracking-[0.14em] text-[#d8ad61] uppercase underline-offset-4 transition-colors hover:text-[#edca87] hover:underline"
                     >
                       Book / Details
                     </a>
@@ -225,7 +388,7 @@ export function VenuePageContent() {
                       href={hotel.mapsUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[0.65rem] font-extrabold tracking-[0.14em] text-[#061c2b]/55 uppercase underline-offset-4 transition-colors hover:text-[#c99b4e] hover:underline"
+                      className="text-[0.65rem] font-extrabold tracking-[0.14em] text-white/55 uppercase underline-offset-4 transition-colors hover:text-[#d8ad61] hover:underline"
                     >
                       Directions
                     </a>
@@ -234,32 +397,45 @@ export function VenuePageContent() {
               </article>
             ))}
           </div>
+
+          <div className="mt-10 border border-white/10 bg-white/[0.04] px-5 py-6 text-center sm:px-8">
+            <p className="text-sm leading-relaxed text-white/70">
+              Looking for different dates, neighbourhoods, or price points?
+            </p>
+            <a
+              href={exploreBarcelonaUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex text-[0.65rem] font-bold tracking-[0.16em] text-[#d8ad61] uppercase underline-offset-4 transition-colors hover:text-[#edca87] hover:underline"
+            >
+              See more options on GetYourGuide →
+            </a>
+          </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#061c2b] px-5 py-14 text-center text-white sm:px-8 sm:py-16">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(216,173,97,0.16),transparent_45%)]" />
+      <section className="relative overflow-hidden bg-[#f7f3eb] px-5 py-14 text-center text-[#0b2638] sm:px-8 sm:py-16">
         <div className="relative mx-auto max-w-2xl">
-          <p className="font-script text-3xl text-[#d8ad61]">See you by the sea</p>
+          <p className="font-script text-3xl text-[#c99b4e]">See you in Barcelona</p>
           <h2 className="mt-3 font-logo text-2xl font-medium sm:text-3xl">
-            Ready for the evening?
+            Ready to confirm your place?
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-white/70">
-            Choose your dinner, save your spot, and we’ll take care of the rest under the Barcelona
-            sky.
+          <p className="mt-4 text-sm leading-relaxed text-[#4a5d6a]">
+            Save your spot for the cruise, dinner, or both — then choose your menu when you’re
+            ready.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
-              href="/menu"
+              href="/rsvp"
               className="inline-flex min-h-11 items-center justify-center rounded-sm bg-[#d7ad62] px-7 text-[0.68rem] font-extrabold tracking-[0.16em] text-[#102536] uppercase transition-colors hover:bg-[#edca87]"
             >
-              View Menu
+              RSVP Now
             </Link>
             <Link
-              href="/rsvp"
-              className="inline-flex min-h-11 items-center justify-center border border-white/30 px-7 text-[0.68rem] font-extrabold tracking-[0.16em] text-white uppercase transition-colors hover:border-[#d8ad61] hover:text-[#d8ad61]"
+              href="/menu"
+              className="inline-flex min-h-11 items-center justify-center border border-[#0b2638]/25 px-7 text-[0.68rem] font-extrabold tracking-[0.16em] text-[#0b2638] uppercase transition-colors hover:border-[#c99b4e] hover:text-[#c99b4e]"
             >
-              RSVP Now
+              View Menu
             </Link>
           </div>
         </div>

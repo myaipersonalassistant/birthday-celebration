@@ -169,7 +169,7 @@ export function AdminRsvpPanel({ initialSubmissions }: AdminRsvpPanelProps) {
   const filters: { id: PlanFilter; label: string }[] = [
     { id: "all", label: "All" },
     { id: "dinner", label: "Dinner" },
-    { id: "cruise", label: "Cruise" },
+    { id: "cruise", label: "Catamaran" },
     { id: "plus-one", label: "+1" },
   ];
 
@@ -187,7 +187,7 @@ export function AdminRsvpPanel({ initialSubmissions }: AdminRsvpPanelProps) {
                 Celebration RSVPs
               </h2>
               <p className="mt-2 text-sm text-white/55">
-                Dinner, cruise, and plus-ones at a glance
+                Purobeach · Hilton dinner · Port Olímpic cruise · plus-ones
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -217,12 +217,13 @@ export function AdminRsvpPanel({ initialSubmissions }: AdminRsvpPanelProps) {
             </div>
           </div>
 
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-5">
             {[
               { label: "Responses", value: stats.responses },
               { label: "Headcount", value: stats.headcount },
               { label: "Dinner", value: stats.dinner },
-              { label: "Cruise", value: stats.cruise },
+              { label: "Catamaran", value: stats.cruise },
+              { label: "Plus-ones", value: stats.plusOnes },
             ].map((stat) => (
               <div
                 key={stat.label}
@@ -323,7 +324,8 @@ export function AdminRsvpPanel({ initialSubmissions }: AdminRsvpPanelProps) {
           <div className="border border-[#d8cfbf] bg-white px-6 py-16 text-center">
             <p className="font-logo text-2xl text-[#061c2b]">No RSVPs yet</p>
             <p className="mx-auto mt-2 max-w-md text-sm text-[#4a5d6a]">
-              When guests complete the RSVP form, their plans will appear here.
+              When guests complete the RSVP form, dinner and catamaran
+              plans will appear here.
             </p>
           </div>
         ) : filtered.length === 0 ? (
@@ -359,12 +361,12 @@ export function AdminRsvpPanel({ initialSubmissions }: AdminRsvpPanelProps) {
                       <div className="mt-3 flex flex-wrap gap-2">
                         {entry.attendDinner && (
                           <span className="bg-[#061c2b] px-2.5 py-1 text-[0.6rem] font-bold tracking-[0.1em] text-[#d8ad61] uppercase">
-                            Dinner
+                            Dinner · Purobeach
                           </span>
                         )}
                         {entry.joinCruise && (
                           <span className="border border-[#061c2b] px-2.5 py-1 text-[0.6rem] font-bold tracking-[0.1em] text-[#061c2b] uppercase">
-                            Cruise
+                            Cruise · Marina
                           </span>
                         )}
                         {entry.bringingGuest && (
