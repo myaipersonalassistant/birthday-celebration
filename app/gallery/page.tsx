@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getGalleryMedia } from "@/app/actions/gallery";
 import { Footer } from "@/components/Footer";
 import { GalleryGrid } from "@/components/GalleryGrid";
@@ -19,7 +20,33 @@ export default async function GalleryPage() {
 
       <section className="relative overflow-hidden bg-[#061c2b] px-5 pt-28 pb-14 text-white sm:px-8 sm:pt-32 sm:pb-16 lg:px-12">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(216,173,97,0.2),transparent_40%),radial-gradient(circle_at_85%_0%,rgba(216,173,97,0.12),transparent_35%)]" />
-        <div className="relative mx-auto max-w-[1100px] text-center">
+
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 grid grid-cols-3"
+        >
+          <div className="relative overflow-hidden">
+            <Image
+              src="/left.png"
+              alt=""
+              width={707}
+              height={345}
+              className="absolute top-1/2 left-0 h-[92%] w-auto max-w-full -translate-y-1/2 object-contain object-left opacity-[0.16]"
+            />
+          </div>
+          <div />
+          <div className="relative overflow-hidden">
+            <Image
+              src="/right.png"
+              alt=""
+              width={722}
+              height={346}
+              className="absolute top-1/2 right-0 h-[92%] w-auto max-w-full -translate-y-1/2 object-contain object-right opacity-[0.16]"
+            />
+          </div>
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-[1100px] text-center">
           <p className="animate-[menuItemRise_0.7s_ease-out_both] text-xs font-bold tracking-[0.22em] text-[#d8ad61] uppercase">
             Captured in light
           </p>

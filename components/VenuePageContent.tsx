@@ -153,9 +153,34 @@ export function VenuePageContent() {
 
       <section
         id="evening-hilton"
-        className="bg-[#061c2b] px-5 py-14 text-white sm:px-8 sm:py-16 lg:px-12"
+        className="relative overflow-hidden bg-[#061c2b] px-5 py-14 text-white sm:px-8 sm:py-16 lg:px-12"
       >
-        <div className="mx-auto grid max-w-[1240px] items-center gap-10 lg:grid-cols-2 lg:gap-14">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 grid grid-cols-3"
+        >
+          <div className="relative overflow-hidden">
+            <Image
+              src="/left.png"
+              alt=""
+              width={707}
+              height={345}
+              className="absolute top-1/2 left-0 h-[92%] w-auto max-w-full -translate-y-1/2 object-contain object-left opacity-[0.16]"
+            />
+          </div>
+          <div />
+          <div className="relative overflow-hidden">
+            <Image
+              src="/right.png"
+              alt=""
+              width={722}
+              height={346}
+              className="absolute top-1/2 right-0 h-[92%] w-auto max-w-full -translate-y-1/2 object-contain object-right opacity-[0.16]"
+            />
+          </div>
+        </div>
+
+        <div className="relative z-10 mx-auto grid max-w-[1240px] items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <div className="relative order-2 lg:order-1">
             <div className="absolute -top-3 -left-3 h-16 w-16 border-t border-l border-[#d8ad61]/70" />
             <div className="absolute -right-3 -bottom-3 h-16 w-16 border-r border-b border-[#d8ad61]/70" />

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { getInvitationMedia } from "@/app/actions/admin-invitation";
 import { Footer } from "@/components/Footer";
@@ -18,13 +19,38 @@ export default async function InvitationPage() {
     <main className="min-h-screen bg-[#061c2b] text-white">
       <Header />
 
-      <section className="relative px-5 pt-28 pb-16 sm:px-8 sm:pt-32 sm:pb-20 lg:px-12">
+      <section className="relative overflow-hidden px-5 pt-28 pb-16 sm:px-8 sm:pt-32 sm:pb-20 lg:px-12">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(216,173,97,0.14),transparent_45%)]"
         />
 
-        <div className="relative mx-auto flex max-w-[720px] flex-col items-center text-center">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 grid grid-cols-3"
+        >
+          <div className="relative overflow-hidden">
+            <Image
+              src="/left.png"
+              alt=""
+              width={707}
+              height={345}
+              className="absolute top-30 left-0 h-[70%] w-auto max-w-full object-contain object-left object-top opacity-[0.16] sm:h-[75%]"
+            />
+          </div>
+          <div />
+          <div className="relative overflow-hidden">
+            <Image
+              src="/right.png"
+              alt=""
+              width={722}
+              height={346}
+              className="absolute top-30 right-0 h-[70%] w-auto max-w-full object-contain object-right object-top opacity-[0.16] sm:h-[75%]"
+            />
+          </div>
+        </div>
+
+        <div className="relative z-10 mx-auto flex max-w-[720px] flex-col items-center text-center">
           <p className="animate-[menuItemRise_0.7s_ease-out_both] text-xs font-bold tracking-[0.22em] text-[#d8ad61] uppercase">
             From the heart
           </p>
