@@ -111,7 +111,7 @@ export function AdminLoginForm() {
           disabled={isBusy}
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          className="w-full border border-white/12 bg-[#061c2b]/55 px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-white/30 focus:border-[#d8ad61] focus:bg-[#061c2b]/75 disabled:cursor-not-allowed disabled:opacity-50"
+          className="min-h-12 w-full border border-white/12 bg-[#061c2b]/55 px-4 py-3.5 text-base text-white outline-none transition placeholder:text-white/30 focus:border-[#d8ad61] focus:bg-[#061c2b]/75 disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm"
           placeholder="you@example.com"
         />
       </div>
@@ -132,7 +132,7 @@ export function AdminLoginForm() {
             disabled={isBusy}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            className="w-full border border-white/12 bg-[#061c2b]/55 px-4 py-3.5 pr-16 text-sm text-white outline-none transition placeholder:text-white/30 focus:border-[#d8ad61] focus:bg-[#061c2b]/75 disabled:cursor-not-allowed disabled:opacity-50"
+            className="min-h-12 w-full border border-white/12 bg-[#061c2b]/55 px-4 py-3.5 pr-16 text-base text-white outline-none transition placeholder:text-white/30 focus:border-[#d8ad61] focus:bg-[#061c2b]/75 disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm"
             placeholder="Enter your password"
           />
           <button
@@ -159,7 +159,7 @@ export function AdminLoginForm() {
       <button
         type="submit"
         disabled={isBusy}
-        className="group relative flex w-full items-center justify-center gap-2.5 overflow-hidden bg-[#d8ad61] px-4 py-4 text-sm font-bold tracking-[0.14em] text-[#102536] uppercase transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-80 animate-[menuItemRise_0.5s_ease-out_0.12s_both]"
+        className="group relative flex min-h-12 w-full items-center justify-center gap-2.5 overflow-hidden bg-[#d8ad61] px-4 py-4 text-sm font-bold tracking-[0.14em] text-[#102536] uppercase transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-80 animate-[menuItemRise_0.5s_ease-out_0.12s_both]"
       >
         {isPending && !isRedirecting ? (
           <>

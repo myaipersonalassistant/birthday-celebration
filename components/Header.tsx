@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -103,21 +104,17 @@ export function Header() {
           <Link
             href="/"
             aria-label="Celebrate Angela—home"
-            className="relative block h-14 w-36 shrink-0 sm:h-16 sm:w-40"
+            className="relative block shrink-0"
             onClick={() => setIsMenuOpen(false)}
           >
-            <span className="absolute top-0 left-0 font-logo text-[1.5rem] leading-none font-medium tracking-[-0.02em] text-white sm:text-[1.7rem]">
-              celebrate
-            </span>
-            <span className="absolute top-4 left-3 w-max whitespace-nowrap font-script text-[3rem] leading-none text-[#d8ad61] drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)] sm:text-[3.5rem]">
-              Angela
-              <span
-                aria-hidden="true"
-                className="absolute -top-1 -right-5 rotate-12 font-sans text-base"
-              >
-                ♥
-              </span>
-            </span>
+            <Image
+              src="/logobg.png"
+              alt="Celebrate Angela Ifonlaja"
+              width={200}
+              height={240}
+              priority
+              className="h-14 w-auto object-contain object-left mix-blend-screen sm:h-16 lg:h-[4.75rem]"
+            />
           </Link>
 
           <nav aria-label="Main navigation" className="hidden items-center gap-7 xl:flex 2xl:gap-9">

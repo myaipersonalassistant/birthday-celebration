@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
     <svg aria-hidden="true" className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -115,10 +118,22 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex items-center justify-center text-center lg:justify-end lg:text-right">
-          <p className="whitespace-nowrap font-script text-2xl text-[#d8ad61] sm:text-[1.7rem]">
+        <div className="flex flex-col items-center justify-center gap-3 text-center lg:items-end lg:text-right">
+          <Link href="/" aria-label="Celebrate Angela—home" className="block">
+            <Image
+              src="/logobg.png"
+              alt="Celebrate Angela Ifonlaja"
+              width={220}
+              height={260}
+              className="h-28 w-auto object-contain mix-blend-screen sm:h-32"
+            />
+          </Link>
+          <p className="font-script text-xl text-[#d8ad61] sm:text-[1.5rem]">
             Made with love for Angela{" "}
-            <span aria-hidden="true" className="ml-1 inline-block align-middle text-4xl leading-none sm:text-5xl">
+            <span
+              aria-hidden="true"
+              className="ml-1 inline-block align-middle text-3xl leading-none"
+            >
               ♥
             </span>
           </p>
