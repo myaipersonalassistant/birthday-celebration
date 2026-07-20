@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { RsvpInteractiveForm } from "@/components/RsvpInteractiveForm";
+import { cruiseDetails } from "@/lib/cruise-data";
 
 const dayMoments = [
   {
@@ -31,13 +32,23 @@ export function RsvpSection() {
       <div className="grid h-full items-stretch gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(240px,0.95fr)] lg:gap-7">
         <div className="order-2 flex flex-col lg:order-1">
           <RsvpInteractiveForm variant="dark" headingId="rsvp-heading" />
-          <Link
-            href="/rsvp"
-            className="group mt-5 inline-flex items-center gap-2 self-start text-[0.65rem] font-extrabold tracking-[0.14em] text-[#d8ad61] uppercase transition-all duration-300 hover:gap-3"
-          >
-            Open full RSVP page
-            <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-          </Link>
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Link
+              href="/rsvp"
+              className="group inline-flex items-center gap-2 text-[0.65rem] font-extrabold tracking-[0.14em] text-[#d8ad61] uppercase transition-all duration-300 hover:gap-3"
+            >
+              Open full RSVP page
+              <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+                →
+              </span>
+            </Link>
+            <Link
+              href="/cruise"
+              className="text-[0.65rem] font-bold tracking-[0.12em] text-white/45 uppercase transition hover:text-[#d8ad61]"
+            >
+              Celebration at Sea
+            </Link>
+          </div>
         </div>
 
         <aside className="relative order-1 lg:order-2 lg:flex lg:h-full lg:min-h-0 lg:max-h-[560px] lg:flex-col">
@@ -104,6 +115,21 @@ export function RsvpSection() {
                         <p className="text-xs text-white/65">{moment.detail}</p>
                       </div>
                     ))}
+                  </div>
+
+                  <div className="border-t border-white/15 pt-3">
+                    <p className="text-[0.6rem] font-bold tracking-[0.14em] text-[#d8ad61] uppercase">
+                      Optional · After
+                    </p>
+                    <p className="mt-1 font-logo text-base text-white">
+                      {cruiseDetails.title}
+                    </p>
+                    <p className="mt-0.5 text-xs text-white/65">
+                      {cruiseDetails.ship} · {cruiseDetails.dateRangeShort}
+                    </p>
+                    <span className="mt-2 inline-block text-[0.6rem] font-bold tracking-[0.12em] text-[#d8ad61]/90 uppercase">
+                      Mark interest in the RSVP form →
+                    </span>
                   </div>
 
                   <p className="text-[0.6rem] font-bold tracking-[0.16em] text-white/50 uppercase">

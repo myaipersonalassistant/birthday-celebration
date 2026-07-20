@@ -24,6 +24,7 @@ export type AdminOverviewData = {
   rsvp: {
     dinner: number;
     cruise: number;
+    mscInterest: number;
     plusOnes: number;
     headcount: number;
   };
@@ -87,7 +88,9 @@ export async function getAdminOverviewData(): Promise<AdminOverviewData> {
       .neq("dietary_notes", ""),
     supabase
       .from("rsvp_submissions")
-      .select("id, first_name, last_name, attend_dinner, join_cruise, created_at")
+      .select(
+        "id, first_name, last_name, attend_dinner, join_cruise, interested_msc_cruise, created_at",
+      )
       .order("created_at", { ascending: false })
       .limit(4),
     supabase
@@ -107,11 +110,12 @@ export async function getAdminOverviewData(): Promise<AdminOverviewData> {
       .limit(4),
     supabase
       .from("rsvp_submissions")
-      .select("attend_dinner, join_cruise, bringing_guest"),
+      .select("attend_dinner, join_cruise, interested_msc_cruise, bringing_guest"),
   ]);
 
   let dinner = 0;
   let cruise = 0;
+  let mscInterest = 0;
   let plusOnes = 0;
   let headcount = 0;
 
@@ -119,6 +123,7 @@ export async function getAdminOverviewData(): Promise<AdminOverviewData> {
     headcount += 1 + (row.bringing_guest ? 1 : 0);
     if (row.attend_dinner) dinner += 1;
     if (row.join_cruise) cruise += 1;
+    if (row.interested_msc_cruise) mscInterest += 1;
     if (row.bringing_guest) plusOnes += 1;
   }
 
@@ -126,8 +131,9 @@ export async function getAdminOverviewData(): Promise<AdminOverviewData> {
 
   for (const row of recentRsvps.data ?? []) {
     const plans = [
+      row.join_cruise ? "Catamaran" : null,
       row.attend_dinner ? "Dinner" : null,
-      row.join_cruise ? "Cruise" : null,
+      row.interested_msc_cruise ? "MSC" : null,
     ]
       .filter(Boolean)
       .join(" · ");
@@ -198,6 +204,7 @@ export async function getAdminOverviewData(): Promise<AdminOverviewData> {
     rsvp: {
       dinner,
       cruise,
+      mscInterest,
       plusOnes,
       headcount,
     },

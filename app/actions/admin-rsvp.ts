@@ -13,6 +13,7 @@ export type RsvpSubmission = {
   country: string;
   attendDinner: boolean;
   joinCruise: boolean;
+  interestedMscCruise: boolean;
   bringingGuest: boolean;
   guestName: string | null;
   message: string | null;
@@ -30,6 +31,7 @@ function mapRow(row: {
   country: string;
   attend_dinner: boolean;
   join_cruise: boolean;
+  interested_msc_cruise?: boolean | null;
   bringing_guest: boolean;
   guest_name: string | null;
   message: string | null;
@@ -44,6 +46,7 @@ function mapRow(row: {
     country: row.country,
     attendDinner: row.attend_dinner,
     joinCruise: row.join_cruise,
+    interestedMscCruise: Boolean(row.interested_msc_cruise),
     bringingGuest: row.bringing_guest,
     guestName: row.guest_name,
     message: row.message,
@@ -59,7 +62,7 @@ export async function getAdminRsvpSubmissions(): Promise<RsvpSubmission[]> {
     const { data, error } = await supabase
       .from("rsvp_submissions")
       .select(
-        "id, first_name, last_name, email, phone, country, attend_dinner, join_cruise, bringing_guest, guest_name, message, created_at",
+        "id, first_name, last_name, email, phone, country, attend_dinner, join_cruise, interested_msc_cruise, bringing_guest, guest_name, message, created_at",
       )
       .order("created_at", { ascending: false })
       .limit(500);

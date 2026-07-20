@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const moments = [
   {
@@ -152,6 +153,17 @@ export function DayPlanSection() {
             </li>
           ))}
         </ol>
+
+        <p className="mt-8 text-center text-xs leading-relaxed text-white/55 sm:text-sm">
+          Optional after the birthday: continue aboard{" "}
+          <Link
+            href="/cruise"
+            className="font-semibold text-[#d8ad61] underline-offset-2 transition hover:text-[#edca87] hover:underline"
+          >
+            MSC Grandiosa · 8–15 August
+          </Link>
+          .
+        </p>
       </div>
     </section>
   );

@@ -15,6 +15,7 @@ export type AdminVisitor = {
   sources: VisitorSource[];
   attendDinner: boolean | null;
   joinCruise: boolean | null;
+  interestedMscCruise: boolean | null;
   bringingGuest: boolean | null;
   guestName: string | null;
   dietaryNotes: string | null;
@@ -81,6 +82,8 @@ function mergeVisitor(
     sources,
     attendDinner: next.attendDinner ?? current.attendDinner,
     joinCruise: next.joinCruise ?? current.joinCruise,
+    interestedMscCruise:
+      next.interestedMscCruise ?? current.interestedMscCruise,
     bringingGuest: next.bringingGuest ?? current.bringingGuest,
     guestName: next.guestName || current.guestName,
     dietaryNotes: next.dietaryNotes || current.dietaryNotes,
@@ -100,7 +103,7 @@ export async function getAdminVisitors(): Promise<AdminVisitor[]> {
     supabase
       .from("rsvp_submissions")
       .select(
-        "id, first_name, last_name, email, phone, country, attend_dinner, join_cruise, bringing_guest, guest_name, created_at",
+        "id, first_name, last_name, email, phone, country, attend_dinner, join_cruise, interested_msc_cruise, bringing_guest, guest_name, created_at",
       )
       .order("created_at", { ascending: false })
       .limit(500),
@@ -137,6 +140,7 @@ export async function getAdminVisitors(): Promise<AdminVisitor[]> {
         source: "rsvp",
         attendDinner: row.attend_dinner,
         joinCruise: row.join_cruise,
+        interestedMscCruise: Boolean(row.interested_msc_cruise),
         bringingGuest: row.bringing_guest,
         guestName: row.guest_name,
         dietaryNotes: null,
@@ -173,6 +177,7 @@ export async function getAdminVisitors(): Promise<AdminVisitor[]> {
         source: "menu",
         attendDinner: null,
         joinCruise: null,
+        interestedMscCruise: null,
         bringingGuest: null,
         guestName: null,
         dietaryNotes: row.dietary_notes?.trim() || null,
@@ -200,6 +205,7 @@ export async function getAdminVisitors(): Promise<AdminVisitor[]> {
         source: "guestbook",
         attendDinner: null,
         joinCruise: null,
+        interestedMscCruise: null,
         bringingGuest: null,
         guestName: null,
         dietaryNotes: null,

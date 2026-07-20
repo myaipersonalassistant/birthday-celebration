@@ -66,8 +66,8 @@ export function AdminAnalyticsPanel({ data }: AdminAnalyticsPanelProps) {
             Celebration analytics
           </h2>
           <p className="mt-2 max-w-xl text-sm text-white/55">
-            Purobeach · Hilton dinner &amp; catamaran RSVPs, evening menu counts,
-            guestbook, and studio health.
+            Purobeach · Hilton dinner, Port Olímpic catamaran, MSC interest,
+            evening menu counts, guestbook, and studio health.
           </p>
 
           <div className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4">
@@ -131,7 +131,7 @@ export function AdminAnalyticsPanel({ data }: AdminAnalyticsPanelProps) {
             <div>
               <p className="font-script text-2xl text-[#c99b4e]">Attendance</p>
               <p className="text-xs font-bold tracking-[0.12em] text-[#8a7a5c] uppercase">
-                Purobeach · Hilton dinner · marina cruise · plus-ones
+                Catamaran · dinner · MSC interest · plus-ones
               </p>
             </div>
             <Link
@@ -141,10 +141,11 @@ export function AdminAnalyticsPanel({ data }: AdminAnalyticsPanelProps) {
               RSVPs →
             </Link>
           </div>
-          <div className="mt-5 grid grid-cols-3 gap-3">
+          <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
-              { label: "Dinner", value: data.totals.dinner },
               { label: "Catamaran", value: data.totals.cruise },
+              { label: "Dinner", value: data.totals.dinner },
+              { label: "MSC interest", value: data.totals.mscInterest },
               { label: "Plus-ones", value: data.totals.plusOnes },
             ].map((stat) => (
               <div

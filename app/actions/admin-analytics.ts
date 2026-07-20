@@ -24,6 +24,7 @@ export type AdminAnalyticsData = {
     headcount: number;
     dinner: number;
     cruise: number;
+    mscInterest: number;
     plusOnes: number;
     menus: number;
     dietaryNotes: number;
@@ -134,7 +135,7 @@ export async function getAdminAnalyticsData(): Promise<AdminAnalyticsData> {
     supabase
       .from("rsvp_submissions")
       .select(
-        "country, attend_dinner, join_cruise, bringing_guest, created_at",
+        "country, attend_dinner, join_cruise, interested_msc_cruise, bringing_guest, created_at",
       )
       .order("created_at", { ascending: false })
       .limit(1000),
@@ -178,7 +179,7 @@ export async function getAdminAnalyticsData(): Promise<AdminAnalyticsData> {
 
   if (rsvpTotal > rsvpRows.length) {
     warnings.push(
-      `Dinner, cruise, plus-ones, countries, and the 14-day RSVP bars use the latest ${rsvpRows.length} of ${rsvpTotal} RSVPs.`,
+      `Dinner, catamaran, MSC interest, plus-ones, countries, and the 14-day RSVP bars use the latest ${rsvpRows.length} of ${rsvpTotal} RSVPs.`,
     );
   }
   if (menuTotal > menuRows.length) {
@@ -189,6 +190,7 @@ export async function getAdminAnalyticsData(): Promise<AdminAnalyticsData> {
 
   let dinner = 0;
   let cruise = 0;
+  let mscInterest = 0;
   let plusOnes = 0;
   let headcount = 0;
   const countryMap = new Map<string, number>();
@@ -197,6 +199,7 @@ export async function getAdminAnalyticsData(): Promise<AdminAnalyticsData> {
     headcount += 1 + (row.bringing_guest ? 1 : 0);
     if (row.attend_dinner) dinner += 1;
     if (row.join_cruise) cruise += 1;
+    if (row.interested_msc_cruise) mscInterest += 1;
     if (row.bringing_guest) plusOnes += 1;
     countryMap.set(row.country, (countryMap.get(row.country) ?? 0) + 1);
   }
@@ -259,6 +262,7 @@ export async function getAdminAnalyticsData(): Promise<AdminAnalyticsData> {
       headcount,
       dinner,
       cruise,
+      mscInterest,
       plusOnes,
       menus: menuTotal,
       dietaryNotes: dietaryCountRes.count ?? 0,

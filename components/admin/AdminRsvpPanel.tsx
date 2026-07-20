@@ -18,7 +18,7 @@ const countryLabels: Record<string, string> = {
   other: "Other",
 };
 
-type PlanFilter = "all" | "dinner" | "cruise" | "plus-one";
+type PlanFilter = "all" | "dinner" | "cruise" | "msc" | "plus-one";
 
 function formatDate(value: string) {
   try {
@@ -75,6 +75,7 @@ export function AdminRsvpPanel({ initialSubmissions }: AdminRsvpPanelProps) {
   const stats = useMemo(() => {
     let dinner = 0;
     let cruise = 0;
+    let msc = 0;
     let plusOnes = 0;
     let headcount = 0;
     const byCountry = new Map<string, number>();
@@ -83,6 +84,7 @@ export function AdminRsvpPanel({ initialSubmissions }: AdminRsvpPanelProps) {
       headcount += 1 + (entry.bringingGuest ? 1 : 0);
       if (entry.attendDinner) dinner += 1;
       if (entry.joinCruise) cruise += 1;
+      if (entry.interestedMscCruise) msc += 1;
       if (entry.bringingGuest) plusOnes += 1;
       byCountry.set(
         entry.country,
@@ -98,6 +100,7 @@ export function AdminRsvpPanel({ initialSubmissions }: AdminRsvpPanelProps) {
       responses: submissions.length,
       dinner,
       cruise,
+      msc,
       plusOnes,
       headcount,
       countries,
@@ -110,6 +113,7 @@ export function AdminRsvpPanel({ initialSubmissions }: AdminRsvpPanelProps) {
     return submissions.filter((entry) => {
       if (planFilter === "dinner" && !entry.attendDinner) return false;
       if (planFilter === "cruise" && !entry.joinCruise) return false;
+      if (planFilter === "msc" && !entry.interestedMscCruise) return false;
       if (planFilter === "plus-one" && !entry.bringingGuest) return false;
 
       if (!q) return true;
@@ -170,6 +174,7 @@ export function AdminRsvpPanel({ initialSubmissions }: AdminRsvpPanelProps) {
     { id: "all", label: "All" },
     { id: "dinner", label: "Dinner" },
     { id: "cruise", label: "Catamaran" },
+    { id: "msc", label: "MSC" },
     { id: "plus-one", label: "+1" },
   ];
 
@@ -187,7 +192,8 @@ export function AdminRsvpPanel({ initialSubmissions }: AdminRsvpPanelProps) {
                 Celebration RSVPs
               </h2>
               <p className="mt-2 text-sm text-white/55">
-                Purobeach · Hilton dinner · Port Olímpic cruise · plus-ones
+                Purobeach · Hilton dinner · Port Olímpic catamaran · MSC interest ·
+                plus-ones
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -217,12 +223,13 @@ export function AdminRsvpPanel({ initialSubmissions }: AdminRsvpPanelProps) {
             </div>
           </div>
 
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-5">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {[
               { label: "Responses", value: stats.responses },
               { label: "Headcount", value: stats.headcount },
               { label: "Dinner", value: stats.dinner },
               { label: "Catamaran", value: stats.cruise },
+              { label: "MSC interest", value: stats.msc },
               { label: "Plus-ones", value: stats.plusOnes },
             ].map((stat) => (
               <div
@@ -367,6 +374,11 @@ export function AdminRsvpPanel({ initialSubmissions }: AdminRsvpPanelProps) {
                         {entry.joinCruise && (
                           <span className="border border-[#061c2b] px-2.5 py-1 text-[0.6rem] font-bold tracking-[0.1em] text-[#061c2b] uppercase">
                             Cruise · Marina
+                          </span>
+                        )}
+                        {entry.interestedMscCruise && (
+                          <span className="border border-[#d8ad61] bg-[#061c2b] px-2.5 py-1 text-[0.6rem] font-bold tracking-[0.1em] text-[#d8ad61] uppercase">
+                            MSC · Interested
                           </span>
                         )}
                         {entry.bringingGuest && (

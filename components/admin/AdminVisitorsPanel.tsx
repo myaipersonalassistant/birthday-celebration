@@ -437,11 +437,16 @@ export function AdminVisitorsPanel({
 
               {(selected.attendDinner != null ||
                 selected.joinCruise != null ||
+                selected.interestedMscCruise != null ||
                 selected.bringingGuest != null) && (
                 <DetailSection title="Celebration plans">
                   <div className="flex flex-wrap gap-2">
                     <PlanChip active={selected.attendDinner} label="Dinner · Purobeach" />
                     <PlanChip active={selected.joinCruise} label="Cruise · Marina" />
+                    <PlanChip
+                      active={selected.interestedMscCruise}
+                      label="MSC · Interested"
+                    />
                     {selected.bringingGuest != null && (
                       <span
                         className={`px-2.5 py-1 text-[0.58rem] font-bold tracking-[0.1em] uppercase ${

@@ -6,7 +6,7 @@ import { VenuePageContent } from "@/components/VenuePageContent";
 export const metadata: Metadata = {
   title: "Venue & Hotels | Angela Ifonlaja",
   description:
-    "Port Olímpic marina for the catamaran, Purobeach at Hilton Diagonal Mar for dinner, nearby hotels, and more Barcelona options on GetYourGuide.",
+    "Port Olímpic marina for the catamaran, Purobeach at Hilton Diagonal Mar for dinner, nearby hotels, and an optional MSC Grandiosa continuation at sea.",
 };
 
 export default function VenuePage() {

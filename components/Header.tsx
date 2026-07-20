@@ -10,6 +10,7 @@ const navigation = [
   { label: "Home", href: "/" },
   { label: "Invitation", href: "/invitation" },
   { label: "Venue", href: "/venue" },
+  { label: "Cruise", href: "/cruise" },
   { label: "Menu", href: "/menu" },
   { label: "Gallery", href: "/gallery" },
   { label: "Guestbook", href: "/guestbook" },

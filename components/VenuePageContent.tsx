@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { cruiseDetails } from "@/lib/cruise-data";
 import {
   arrivalNotes,
   eveningVenue,
@@ -76,6 +77,12 @@ export function VenuePageContent() {
               className="inline-flex min-h-11 items-center justify-center border border-white/30 px-7 text-[0.68rem] font-extrabold tracking-[0.16em] text-white uppercase transition-colors hover:border-[#d8ad61] hover:text-[#d8ad61]"
             >
               Stay Nearby
+            </a>
+            <a
+              href="#continue-at-sea"
+              className="inline-flex min-h-11 items-center justify-center border border-[#d8ad61]/50 px-7 text-[0.68rem] font-extrabold tracking-[0.16em] text-[#d8ad61] uppercase transition-colors hover:border-[#d8ad61] hover:bg-[#d8ad61]/10"
+            >
+              Continue at Sea
             </a>
           </div>
         </div>
@@ -434,6 +441,94 @@ export function VenuePageContent() {
               className="mt-4 inline-flex text-[0.65rem] font-bold tracking-[0.16em] text-[#d8ad61] uppercase underline-offset-4 transition-colors hover:text-[#edca87] hover:underline"
             >
               See more options on GetYourGuide →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="continue-at-sea"
+        className="relative overflow-hidden bg-[#f7f3eb] px-5 py-14 text-[#0b2638] sm:px-8 sm:py-16 lg:px-12"
+      >
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 grid grid-cols-3 opacity-40"
+        >
+          <div className="relative overflow-hidden">
+            <Image
+              src="/left.png"
+              alt=""
+              width={707}
+              height={345}
+              className="absolute top-0 left-0 h-[80%] w-auto max-w-full object-contain object-left object-top opacity-[0.35]"
+            />
+          </div>
+          <div />
+          <div className="relative overflow-hidden">
+            <Image
+              src="/right.png"
+              alt=""
+              width={722}
+              height={346}
+              className="absolute top-0 right-0 h-[80%] w-auto max-w-full object-contain object-right object-top opacity-[0.35]"
+            />
+          </div>
+        </div>
+
+        <div className="relative z-10 mx-auto grid max-w-[1100px] items-center gap-8 border border-[#d8cfbf] bg-white px-6 py-8 shadow-[0_16px_48px_rgba(11,38,56,0.06)] sm:px-10 sm:py-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">
+          <div>
+            <p className="text-[0.65rem] font-bold tracking-[0.2em] text-[#c99b4e] uppercase">
+              Optional · After 7 August
+            </p>
+            <h2 className="mt-3 font-logo text-[clamp(1.8rem,4vw,2.6rem)] font-medium tracking-[-0.02em]">
+              {cruiseDetails.title}
+            </h2>
+            <p className="mt-2 font-script text-2xl text-[#c99b4e]/90 sm:text-3xl">
+              aboard{" "}
+              <span className="ml-1 inline-block font-logo text-[0.75em] font-semibold tracking-[0.04em] text-[#8a6a2e]">
+                {cruiseDetails.ship}
+              </span>
+            </p>
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-[#4a5d6a] sm:text-base">
+              When the birthday evening ends, you&apos;re welcome to keep the
+              celebration going — a 7-night Western Mediterranean sailing from
+              Barcelona, {cruiseDetails.dateRangeShort}. Completely optional;
+              book directly with MSC.
+            </p>
+            <p className="mt-3 text-xs tracking-[0.04em] text-[#6b7c88]">
+              Barcelona → Cannes → Genoa → La Spezia → Rome → Palma → Barcelona
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3 lg:items-stretch">
+            <div className="border border-[#ebe4d8] bg-[#faf8f4] px-5 py-4">
+              <p className="text-[0.62rem] font-bold tracking-[0.16em] text-[#c99b4e] uppercase">
+                Departs
+              </p>
+              <p className="mt-1 font-logo text-lg text-[#061c2b]">
+                {cruiseDetails.startLabel}
+              </p>
+              <p className="mt-3 text-[0.62rem] font-bold tracking-[0.16em] text-[#c99b4e] uppercase">
+                Returns
+              </p>
+              <p className="mt-1 font-logo text-lg text-[#061c2b]">
+                {cruiseDetails.endLabel}
+              </p>
+            </div>
+            <Link
+              href="/cruise"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-[#061c2b] px-6 text-[0.67rem] font-extrabold tracking-[0.16em] text-white uppercase transition hover:bg-[#0a2a3f]"
+            >
+              Explore the cruise
+              <span aria-hidden="true">→</span>
+            </Link>
+            <a
+              href={cruiseDetails.mscBookingUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-11 items-center justify-center gap-2 border border-[#061c2b]/20 px-6 text-[0.65rem] font-extrabold tracking-[0.14em] text-[#061c2b] uppercase transition hover:border-[#c99b4e] hover:text-[#c99b4e]"
+            >
+              Book with MSC
             </a>
           </div>
         </div>

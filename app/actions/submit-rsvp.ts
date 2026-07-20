@@ -10,6 +10,7 @@ export type RsvpSubmissionPayload = {
   country: string;
   attendDinner: boolean;
   joinCruise: boolean;
+  interestedMscCruise: boolean;
   bringingGuest: boolean;
   guestName?: string;
   message?: string;
@@ -63,6 +64,7 @@ export async function submitRsvp(
       country,
       attend_dinner: payload.attendDinner,
       join_cruise: payload.joinCruise,
+      interested_msc_cruise: payload.interestedMscCruise,
       bringing_guest: payload.bringingGuest,
       guest_name: payload.bringingGuest ? guestName : null,
       message,

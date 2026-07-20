@@ -75,8 +75,8 @@ export default async function AdminOverviewPage() {
         Overview
       </h1>
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#4a5d6a] sm:text-base">
-        A quick pulse on guests, Purobeach · Hilton dinner &amp; catamaran plans,
-        media, and what needs your attention.
+        A quick pulse on guests, Purobeach · Hilton dinner, Port Olímpic
+        catamaran, MSC interest, media, and what needs your attention.
       </p>
 
       <section className="mt-8 border border-[#061c2b] bg-[#061c2b] px-5 py-6 text-white sm:px-7">
@@ -87,7 +87,7 @@ export default async function AdminOverviewPage() {
             </p>
             <p className="mt-1 font-logo text-2xl sm:text-3xl">Guest plans</p>
             <p className="mt-1 text-xs text-white/45">
-              Dinner · Purobeach · Hilton from 6:30 · Cruise · marina by 1:00
+              Catamaran · marina 1:00 · Dinner · 6:30 · MSC · optional interest
             </p>
           </div>
           <Link
@@ -97,11 +97,12 @@ export default async function AdminOverviewPage() {
             Open RSVPs →
           </Link>
         </div>
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {[
             { label: "Headcount", value: data.rsvp.headcount },
-            { label: "Dinner", value: data.rsvp.dinner },
             { label: "Catamaran", value: data.rsvp.cruise },
+            { label: "Dinner", value: data.rsvp.dinner },
+            { label: "MSC interest", value: data.rsvp.mscInterest },
             { label: "Plus-ones", value: data.rsvp.plusOnes },
           ].map((stat) => (
             <div

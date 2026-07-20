@@ -9,7 +9,7 @@ export default async function AdminAnalyticsPage() {
     <AdminSectionShell
       eyebrow="Insights"
       title="Analytics"
-      description="RSVPs for Purobeach · Hilton dinner & the catamaran, menu counts, guestbook notes, and studio media for the celebration."
+      description="RSVPs for Purobeach · Hilton dinner, the catamaran, MSC interest, menu counts, guestbook notes, and studio media."
     >
       <AdminAnalyticsPanel data={data} />
     </AdminSectionShell>

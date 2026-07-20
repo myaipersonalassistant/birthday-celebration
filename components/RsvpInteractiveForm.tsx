@@ -39,12 +39,18 @@ export function RsvpInteractiveForm({
   const [country, setCountry] = useState("");
   const [attendDinner, setAttendDinner] = useState(true);
   const [joinCruise, setJoinCruise] = useState(false);
+  const [interestedMscCruise, setInterestedMscCruise] = useState(false);
   const [bringingGuest, setBringingGuest] = useState(false);
   const [guestName, setGuestName] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [successName, setSuccessName] = useState("");
+  const [successPlan, setSuccessPlan] = useState({
+    attendDinner: false,
+    joinCruise: false,
+    interestedMscCruise: false,
+  });
   const [isPending, startTransition] = useTransition();
   const [isMounted, setIsMounted] = useState(false);
 
@@ -113,6 +119,7 @@ export function RsvpInteractiveForm({
         country,
         attendDinner,
         joinCruise,
+        interestedMscCruise,
         bringingGuest,
         guestName,
         message,
@@ -125,6 +132,11 @@ export function RsvpInteractiveForm({
 
       setShowSuccess(true);
       setSuccessName(firstName.trim());
+      setSuccessPlan({
+        attendDinner,
+        joinCruise,
+        interestedMscCruise,
+      });
       setStep(1);
       setFirstName("");
       setLastName("");
@@ -133,11 +145,35 @@ export function RsvpInteractiveForm({
       setCountry("");
       setAttendDinner(true);
       setJoinCruise(false);
+      setInterestedMscCruise(false);
       setBringingGuest(false);
       setGuestName("");
       setMessage("");
     });
   };
+
+  const successArrivalCopy = (() => {
+    const namePrefix = successName ? `${successName}, ` : "";
+    const opener = `${namePrefix}we can’t wait to celebrate Angela with you in Barcelona.`;
+
+    if (successPlan.joinCruise && successPlan.attendDinner) {
+      return `${opener} Please arrive at the Port Olímpic marina by 1:00 PM for the catamaran, then join dinner at Purobeach · Hilton Diagonal Mar from 6:30 PM.`;
+    }
+
+    if (successPlan.joinCruise) {
+      return `${opener} Please arrive at the Port Olímpic marina by 1:00 PM for the catamaran.`;
+    }
+
+    if (successPlan.attendDinner) {
+      return `${opener} Please arrive at Purobeach · Hilton Diagonal Mar by 6:30 PM for dinner.`;
+    }
+
+    return `${opener}`;
+  })();
+
+  const successMscNote = successPlan.interestedMscCruise
+    ? " You also marked interest in Celebration at Sea (MSC Grandiosa, 8–15 August) — book that sailing directly with MSC when you’re ready."
+    : "";
 
   const labelClass = isDark
     ? "mb-2 block text-[0.65rem] font-bold tracking-[0.14em] text-[#d8ad61] uppercase"
@@ -200,26 +236,40 @@ export function RsvpInteractiveForm({
             Thank you, {successName || "friend"}
           </h3>
           <p className="relative mt-3 animate-[menuItemRise_0.5s_ease-out_0.24s_both] text-sm leading-relaxed text-white/75">
-            {successName
-              ? `${successName}, we can’t wait to celebrate Angela with you in Barcelona. Please arrive at Purobeach · Hilton Diagonal Mar by 6:30 PM if you’re joining dinner.`
-              : "We can’t wait to celebrate Angela with you in Barcelona. Please arrive at Purobeach · Hilton Diagonal Mar by 6:30 PM if you’re joining dinner."}
+            {successArrivalCopy}
+            {successMscNote}
           </p>
+          {successPlan.attendDinner ? (
+            <p className="relative mt-3 animate-[menuItemRise_0.5s_ease-out_0.28s_both] text-xs text-white/50">
+              Evening dress code: elegant
+            </p>
+          ) : null}
           <div className="relative mt-7 flex flex-wrap justify-center gap-3">
-            <Link
-              href="/menu"
-              className="group relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-sm bg-[#d7ad62] px-6 text-[0.68rem] font-extrabold tracking-[0.14em] text-[#102536] uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-[#edca87] animate-[softPulse_1.8s_ease-out_infinite]"
-            >
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/35 to-transparent transition-transform duration-700 group-hover:translate-x-full"
-              />
-              <span className="relative inline-flex items-center gap-1.5">
-                Choose Menu
-                <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-                  →
+            {successPlan.attendDinner ? (
+              <Link
+                href="/menu"
+                className="group relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-sm bg-[#d7ad62] px-6 text-[0.68rem] font-extrabold tracking-[0.14em] text-[#102536] uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-[#edca87] animate-[softPulse_1.8s_ease-out_infinite]"
+              >
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/35 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+                />
+                <span className="relative inline-flex items-center gap-1.5">
+                  Choose Menu
+                  <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+                    →
+                  </span>
                 </span>
-              </span>
-            </Link>
+              </Link>
+            ) : null}
+            {successPlan.interestedMscCruise ? (
+              <Link
+                href="/cruise"
+                className="inline-flex min-h-11 items-center justify-center border border-[#d8ad61]/50 px-6 text-[0.68rem] font-extrabold tracking-[0.14em] text-[#d8ad61] uppercase transition-all duration-300 hover:scale-[1.02] hover:bg-[#d8ad61]/10"
+              >
+                View Cruise
+              </Link>
+            ) : null}
             <button
               type="button"
               onClick={() => setShowSuccess(false)}
@@ -423,41 +473,9 @@ export function RsvpInteractiveForm({
             >
               <p className={hintClass}>
                 {displayName
-                  ? `${displayName}, choose the moments you’ll join — evening dinner, afternoon cruise, or both.`
-                  : "Choose the moments you’ll join — evening dinner, afternoon cruise, or both."}
+                  ? `${displayName}, choose the moments you’ll join — afternoon catamaran, evening dinner, or both.`
+                  : "Choose the moments you’ll join — afternoon catamaran, evening dinner, or both."}
               </p>
-
-              <button
-                type="button"
-                onClick={() => setAttendDinner((value) => !value)}
-                className={`w-full border px-5 py-4 text-left transition-all duration-300 hover:scale-[1.01] ${
-                  attendDinner ? planActiveClass : planIdleClass
-                }`}
-              >
-                <span className="block font-logo text-xl">Dinner Celebration</span>
-                <span
-                  className={`mt-1 block text-sm ${
-                    attendDinner
-                      ? "text-white/70"
-                      : isDark
-                        ? "text-white/55"
-                        : "text-[#4a5d6a]"
-                  }`}
-                >
-                  Arrive by 6:30 PM · Purobeach · Hilton Diagonal Mar
-                </span>
-                <span
-                  className={`mt-1.5 block text-xs leading-relaxed ${
-                    attendDinner
-                      ? "text-white/55"
-                      : isDark
-                        ? "text-white/40"
-                        : "text-[#6b7c88]"
-                  }`}
-                >
-                  Birthday dinner, fellowship &amp; speeches · dress code elegant
-                </span>
-              </button>
 
               <button
                 type="button"
@@ -501,6 +519,74 @@ export function RsvpInteractiveForm({
                   before dinner.
                 </p>
               )}
+
+              <button
+                type="button"
+                onClick={() => setAttendDinner((value) => !value)}
+                className={`w-full border px-5 py-4 text-left transition-all duration-300 hover:scale-[1.01] ${
+                  attendDinner ? planActiveClass : planIdleClass
+                }`}
+              >
+                <span className="block font-logo text-xl">Dinner Celebration</span>
+                <span
+                  className={`mt-1 block text-sm ${
+                    attendDinner
+                      ? "text-white/70"
+                      : isDark
+                        ? "text-white/55"
+                        : "text-[#4a5d6a]"
+                  }`}
+                >
+                  Arrive by 6:30 PM · Purobeach · Hilton Diagonal Mar
+                </span>
+                <span
+                  className={`mt-1.5 block text-xs leading-relaxed ${
+                    attendDinner
+                      ? "text-white/55"
+                      : isDark
+                        ? "text-white/40"
+                        : "text-[#6b7c88]"
+                  }`}
+                >
+                  Birthday dinner, fellowship &amp; speeches · dress code elegant
+                </span>
+              </button>
+
+              <div
+                className={`border px-4 py-4 ${
+                  isDark ? "border-[#d8ad61]/35 bg-[#d8ad61]/08" : "border-[#d8ad61]/50 bg-[#fff8eb]"
+                }`}
+              >
+                <label className="flex items-start gap-3">
+                  <input
+                    type="checkbox"
+                    checked={interestedMscCruise}
+                    onChange={(event) =>
+                      setInterestedMscCruise(event.target.checked)
+                    }
+                    className="mt-1 size-4 shrink-0 accent-[#d8ad61]"
+                  />
+                  <span className={`text-sm ${isDark ? "text-white" : "text-[#0b2638]"}`}>
+                    <span className="font-semibold">
+                      Interested in Celebration at Sea
+                    </span>
+                    <span
+                      className={`mt-1 block text-xs leading-relaxed ${
+                        isDark ? "text-white/60" : "text-[#4a5d6a]"
+                      }`}
+                    >
+                      Optional MSC Grandiosa · 8–15 August 2026 (book separately
+                      with MSC).{" "}
+                      <Link
+                        href="/cruise"
+                        className="font-semibold text-[#d8ad61] underline-offset-2 hover:underline"
+                      >
+                        Learn more
+                      </Link>
+                    </span>
+                  </span>
+                </label>
+              </div>
 
               <label
                 className={`flex items-start gap-3 border px-4 py-4 ${
@@ -561,16 +647,22 @@ export function RsvpInteractiveForm({
                   }`}
                 >
                   <p>
+                    <span className="text-[#d8ad61]">Catamaran:</span>{" "}
+                    {joinCruise
+                      ? "Yes · marina 1:00 PM, sail 2:00–3:00 PM"
+                      : "No"}
+                  </p>
+                  <p>
                     <span className="text-[#d8ad61]">Dinner:</span>{" "}
                     {attendDinner
                       ? "Yes · Purobeach · Hilton from 6:30 PM"
                       : "No"}
                   </p>
                   <p>
-                    <span className="text-[#d8ad61]">Cruise:</span>{" "}
-                    {joinCruise
-                      ? "Yes · marina 1:00 PM, sail 2:00–3:00 PM"
-                      : "No"}
+                    <span className="text-[#d8ad61]">MSC Grandiosa:</span>{" "}
+                    {interestedMscCruise
+                      ? "Interested · 8–15 Aug (book with MSC)"
+                      : "Not interested"}
                   </p>
                   <p>
                     <span className="text-[#d8ad61]">Guest:</span>{" "}
