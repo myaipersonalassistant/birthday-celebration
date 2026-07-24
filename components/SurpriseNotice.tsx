@@ -1,25 +1,47 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 const STORAGE_KEY = "angela-surprise-notice-seen";
 
+function markSurpriseNoticeSeen() {
+  try {
+    window.localStorage.setItem(STORAGE_KEY, "1");
+  } catch {
+    /* ignore */
+  }
+}
+
 export function SurpriseNotice() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
+  const isAdminRoute = pathname?.startsWith("/admin") ?? false;
+
   useEffect(() => {
     setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted || isAdminRoute) {
+      setIsOpen(false);
+      return;
+    }
+
     try {
       if (window.localStorage.getItem(STORAGE_KEY) !== "1") {
         setIsOpen(true);
+      } else {
+        setIsOpen(false);
       }
     } catch {
       setIsOpen(true);
     }
-  }, []);
+  }, [isMounted, isAdminRoute]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -28,7 +50,9 @@ export function SurpriseNotice() {
     document.body.style.overflow = "hidden";
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") dismiss();
+      if (event.key !== "Escape") return;
+      markSurpriseNoticeSeen();
+      setIsOpen(false);
     };
 
     window.addEventListener("keydown", onKeyDown);
@@ -39,15 +63,11 @@ export function SurpriseNotice() {
   }, [isOpen]);
 
   const dismiss = () => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, "1");
-    } catch {
-      /* ignore */
-    }
+    markSurpriseNoticeSeen();
     setIsOpen(false);
   };
 
-  if (!isMounted || !isOpen) return null;
+  if (!isMounted || !isOpen || isAdminRoute) return null;
 
   return createPortal(
     <div
@@ -56,9 +76,11 @@ export function SurpriseNotice() {
       aria-labelledby="surprise-notice-title"
       className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-8 sm:px-6"
     >
-      <div
-        aria-hidden="true"
+      <button
+        type="button"
+        aria-label="Dismiss surprise notice"
         className="absolute inset-0 bg-[#020d14]/78 backdrop-blur-md animate-[fadeIn_0.45s_ease-out]"
+        onClick={dismiss}
       />
 
       <div className="relative w-full max-w-lg overflow-hidden border border-[#d8ad61]/45 bg-[#061c2b] text-white shadow-[0_40px_100px_rgba(0,0,0,0.55)] animate-[scaleIn_0.5s_cubic-bezier(0.22,1,0.36,1)]">
