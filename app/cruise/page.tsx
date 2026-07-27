@@ -45,7 +45,7 @@ export default function CruisePage() {
               alt=""
               width={707}
               height={345}
-              className="absolute top-0 left-0 h-[70%] w-auto max-w-full object-contain object-left object-top opacity-[0.16] sm:h-[75%]"
+              className="absolute top-1/2 left-0 h-[70%] w-auto max-w-full -translate-y-1/2 object-contain object-left object-center opacity-[0.16] sm:h-[75%]"
             />
           </div>
           <div />
@@ -55,7 +55,7 @@ export default function CruisePage() {
               alt=""
               width={722}
               height={346}
-              className="absolute top-0 right-0 h-[70%] w-auto max-w-full object-contain object-right object-top opacity-[0.16] sm:h-[75%]"
+              className="absolute top-1/2 right-0 h-[70%] w-auto max-w-full -translate-y-1/2 object-contain object-right object-center opacity-[0.16] sm:h-[75%]"
             />
           </div>
         </div>
