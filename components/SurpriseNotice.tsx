@@ -5,16 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-const STORAGE_KEY = "angela-surprise-notice-seen";
-
-function markSurpriseNoticeSeen() {
-  try {
-    window.localStorage.setItem(STORAGE_KEY, "1");
-  } catch {
-    /* ignore */
-  }
-}
-
 export function SurpriseNotice() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -31,16 +21,7 @@ export function SurpriseNotice() {
       setIsOpen(false);
       return;
     }
-
-    try {
-      if (window.localStorage.getItem(STORAGE_KEY) !== "1") {
-        setIsOpen(true);
-      } else {
-        setIsOpen(false);
-      }
-    } catch {
-      setIsOpen(true);
-    }
+    setIsOpen(true);
   }, [isMounted, isAdminRoute]);
 
   useEffect(() => {
@@ -50,9 +31,7 @@ export function SurpriseNotice() {
     document.body.style.overflow = "hidden";
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== "Escape") return;
-      markSurpriseNoticeSeen();
-      setIsOpen(false);
+      if (event.key === "Escape") setIsOpen(false);
     };
 
     window.addEventListener("keydown", onKeyDown);
@@ -62,10 +41,7 @@ export function SurpriseNotice() {
     };
   }, [isOpen]);
 
-  const dismiss = () => {
-    markSurpriseNoticeSeen();
-    setIsOpen(false);
-  };
+  const dismiss = () => setIsOpen(false);
 
   if (!isMounted || !isOpen || isAdminRoute) return null;
 
