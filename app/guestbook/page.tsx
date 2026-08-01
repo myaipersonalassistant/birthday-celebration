@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     "Leave a birthday message for Angela Ifonlaja — a digital guestbook for the Barcelona celebration.",
 };
 
+// Guests sign the book at any time, so this page must never serve a build-time snapshot.
+export const dynamic = "force-dynamic";
+
 export default async function GuestbookPage() {
   const messages = await getGuestbookMessages();
 

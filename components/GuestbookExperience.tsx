@@ -9,6 +9,8 @@ import {
 
 const PAGE_SIZE = 6;
 const rotations = ["-rotate-1", "rotate-1", "-rotate-2", "rotate-0", "rotate-2", "-rotate-1"];
+/** Long notes are collapsed so one message can't tower over the masonry column. */
+const CLAMP_LENGTH = 340;
 
 function formatDate(value: string) {
   try {
@@ -25,6 +27,57 @@ function formatDate(value: string) {
 type GuestbookExperienceProps = {
   initialMessages: GuestbookMessage[];
 };
+
+function GuestbookCard({
+  entry,
+  rotation,
+  animationDelay,
+}: {
+  entry: GuestbookMessage;
+  rotation: string;
+  animationDelay: string;
+}) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const isLong = entry.message.length > CLAMP_LENGTH;
+
+  return (
+    <article
+      className={`mb-4 break-inside-avoid border border-[#d8cfbf] bg-[#fbf8f2] p-5 shadow-[0_12px_30px_rgba(11,38,56,0.06)] transition-transform duration-300 hover:-translate-y-1 ${rotation}`}
+      style={{ animationDelay }}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <span className="font-script text-3xl leading-none text-[#d8ad61]">“</span>
+        <p className="text-[0.6rem] tracking-[0.12em] text-[#8a7348]/70 uppercase">
+          {formatDate(entry.createdAt)}
+        </p>
+      </div>
+      <p
+        className={`mt-2 font-display text-[1.05rem] leading-relaxed text-[#0b2638] ${
+          isLong && !isExpanded ? "line-clamp-[9]" : ""
+        }`}
+      >
+        {entry.message}
+      </p>
+      {isLong && (
+        <button
+          type="button"
+          onClick={() => setIsExpanded((current) => !current)}
+          className="mt-2 text-[0.62rem] font-bold tracking-[0.14em] text-[#c99b4e] uppercase transition-colors hover:text-[#8a6a2e]"
+        >
+          {isExpanded ? "Show less" : "Read full note"}
+        </button>
+      )}
+      <div className="mt-5 border-t border-[#e8e0d2] pt-4">
+        <p className="font-logo text-lg font-semibold text-[#061c2b]">{entry.authorName}</p>
+        {entry.location && (
+          <p className="mt-0.5 text-xs tracking-[0.08em] text-[#8a7348] uppercase">
+            {entry.location}
+          </p>
+        )}
+      </div>
+    </article>
+  );
+}
 
 export function GuestbookExperience({ initialMessages }: GuestbookExperienceProps) {
   const [messages, setMessages] = useState(initialMessages);
@@ -135,7 +188,7 @@ export function GuestbookExperience({ initialMessages }: GuestbookExperienceProp
     <>
       {successModal}
 
-      <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
+      <div className="grid items-start gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
         <section className="relative overflow-hidden border border-[#d8cfbf] bg-[#061c2b] px-5 py-8 text-white sm:px-8 sm:py-10">
           <div className="pointer-events-none absolute -top-10 right-0 size-40 rounded-full bg-[#d8ad61]/15 blur-3xl" />
           <p className="font-script text-2xl text-[#d8ad61]">Leave a note</p>
@@ -259,33 +312,12 @@ export function GuestbookExperience({ initialMessages }: GuestbookExperienceProp
                 className="mt-8 columns-1 gap-4 animate-[menuItemRise_0.4s_ease-out] sm:columns-2"
               >
                 {pageMessages.map((entry, index) => (
-                  <article
+                  <GuestbookCard
                     key={entry.id}
-                    className={`mb-4 break-inside-avoid border border-[#d8cfbf] bg-[#fbf8f2] p-5 shadow-[0_12px_30px_rgba(11,38,56,0.06)] transition-transform duration-300 hover:-translate-y-1 ${
-                      rotations[index % rotations.length]
-                    }`}
-                    style={{ animationDelay: `${index * 45}ms` }}
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <span className="font-script text-3xl leading-none text-[#d8ad61]">“</span>
-                      <p className="text-[0.6rem] tracking-[0.12em] text-[#8a7348]/70 uppercase">
-                        {formatDate(entry.createdAt)}
-                      </p>
-                    </div>
-                    <p className="mt-2 font-display text-[1.05rem] leading-relaxed text-[#0b2638]">
-                      {entry.message}
-                    </p>
-                    <div className="mt-5 border-t border-[#e8e0d2] pt-4">
-                      <p className="font-logo text-lg font-semibold text-[#061c2b]">
-                        {entry.authorName}
-                      </p>
-                      {entry.location && (
-                        <p className="mt-0.5 text-xs tracking-[0.08em] text-[#8a7348] uppercase">
-                          {entry.location}
-                        </p>
-                      )}
-                    </div>
-                  </article>
+                    entry={entry}
+                    rotation={rotations[index % rotations.length]}
+                    animationDelay={`${index * 45}ms`}
+                  />
                 ))}
               </div>
 

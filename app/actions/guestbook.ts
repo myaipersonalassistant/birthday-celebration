@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { createSupabaseServerClient } from "@/lib/supabase";
 
 export type GuestbookMessage = {
@@ -129,6 +130,9 @@ export async function submitGuestbookMessage(
 
       return result.data;
     });
+
+    revalidatePath("/guestbook");
+    revalidatePath("/admin/guestbook");
 
     return { ok: true, entry: mapRow(data) };
   } catch (error) {
